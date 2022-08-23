@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="910.0" prefHeight="600.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testefavafx.ViewController">
+    <top>
+        <ToolBar prefHeight="70.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button fx:id="btNew" mnemonicParsing="false" onAction="#onBtNewAction" prefHeight="70.0" prefWidth="108.0" text="novo [ctrl-n]" />
+                <Button fx:id="btOpen" mnemonicParsing="false" onAction="#onBtOpenAction" prefHeight="70.0" prefWidth="108.0" text="abrir [ctrl-o]" />
+                <Button fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" prefHeight="70.0" prefWidth="108.0" text="salvar [ctrl-s]" />
+                <Button fx:id="btCopy" mnemonicParsing="false" onAction="#onBtCopyAction" prefHeight="70.0" prefWidth="108.0" text="copiar [ctrl-s]" />
+                <Button fx:id="btPaste" mnemonicParsing="false" onAction="#onBtPasteAction" prefHeight="70.0" prefWidth="108.0" text="colar [ctrl-v]" />
+                <Button fx:id="btCut" mnemonicParsing="false" onAction="#onBtCutAction" prefHeight="70.0" prefWidth="108.0" text="recortar [ctrl-x]" />
+                <Button fx:id="btCompile" mnemonicParsing="false" onAction="#onBtCompileAction" prefHeight="70.0" prefWidth="108.0" text="compilar [F7]" />
+                <Button fx:id="btTeam" mnemonicParsing="false" onAction="#onBtTeamAction" prefHeight="70.0" prefWidth="108.0" text="equipe [F1]" />
+            </items>
+        </ToolBar>
+    </top>
+    <bottom>
+        <Label fx:id="lFileName" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="900.0" text="Label" BorderPane.alignment="BOTTOM_LEFT">
+            <BorderPane.margin>
+                <Insets left="10.0" />
+            </BorderPane.margin></Label>
+    </bottom>
+    <center>
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL" BorderPane.alignment="CENTER">
+            <items>
+                <TextArea fx:id="taInput" prefHeight="900.0" prefWidth="900.0" />
+                <TextArea fx:id="taMsg" layoutX="10.0" layoutY="10.0" prefHeight="900.0" prefWidth="900.0" />
+            </items>
+        </SplitPane>
+    </center>
+</BorderPane>
