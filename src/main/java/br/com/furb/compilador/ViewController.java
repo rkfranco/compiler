@@ -1,4 +1,4 @@
-package com.example.testefavafx;
+package br.com.furb.compilador;
 
 import java.io.File;
 

@@ -3,6 +3,6 @@ module com.example.testefavafx {
     requires javafx.fxml;
 
 
-    opens com.example.testefavafx to javafx.fxml;
-    exports com.example.testefavafx;
+    opens br.com.furb.compilador to javafx.fxml;
+    exports br.com.furb.compilador;
 }

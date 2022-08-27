@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>TesteFavaFX</artifactId>
+    <groupId>br.com.furb</groupId>
+    <artifactId>Compilador</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>TesteFavaFX</name>
+    <name>Compilador</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.testefavafx/com.example.testefavafx.Main</mainClass>
+                            <mainClass>br.com.furb.compilador/br.com.furb.compilador.Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
