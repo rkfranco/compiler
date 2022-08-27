@@ -6,65 +6,64 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.BorderPane?>
-
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="910.0" prefHeight="600.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.furb.compilador.ViewController">
     <top>
         <ToolBar prefHeight="70.0" prefWidth="900.0" BorderPane.alignment="CENTER">
             <items>
-                <Button fx:id="btNew" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtNewAction" prefHeight="70.0" prefWidth="108.0" text="novo [ctrl-n]">
+                <Button fx:id="btnNovo" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnNovoAction" prefHeight="70.0" prefWidth="108.0" text="novo [ctrl-n]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/novo.png" />
                         </ImageView>
                    </graphic>
                 </Button>
-                <Button fx:id="btOpen" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtOpenAction" prefHeight="70.0" prefWidth="108.0" text="abrir [ctrl-o]">
+                <Button fx:id="btnAbrir" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnAbrirAction" prefHeight="70.0" prefWidth="108.0" text="abrir [ctrl-o]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/abrir.png" />
                         </ImageView>
                    </graphic>
                 </Button>
-                <Button fx:id="btSave" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtSaveAction" prefHeight="70.0" prefWidth="108.0" text="salvar [ctrl-s]">
+                <Button fx:id="btnSalvar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnSalvarAction" prefHeight="70.0" prefWidth="108.0" text="salvar [ctrl-s]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/salvar.png" />
                         </ImageView>
                    </graphic>
                 </Button>
-                <Button fx:id="btCopy" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtCopyAction" prefHeight="70.0" prefWidth="108.0" text="copiar [ctrl-c]">
+                <Button fx:id="btnCopiar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnCopiarAction" prefHeight="70.0" prefWidth="108.0" text="copiar [ctrl-c]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/copiar.png" />
                         </ImageView>
                    </graphic>
                 </Button>
-                <Button fx:id="btPaste" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtPasteAction" prefHeight="70.0" prefWidth="108.0" text="colar [ctrl-v]">
+                <Button fx:id="btnColar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnColarAction" prefHeight="70.0" prefWidth="108.0" text="colar [ctrl-v]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/colar.png" />
                         </ImageView>
                    </graphic>
                 </Button>
-                <Button fx:id="btCut" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtCutAction" prefHeight="70.0" prefWidth="108.0" text="recortar [ctrl-x]">
+                <Button fx:id="btnRecortar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnRecortarAction" prefHeight="70.0" prefWidth="108.0" text="recortar [ctrl-x]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/recortar.png" />
                         </ImageView>
                    </graphic>
                 </Button>
-                <Button fx:id="btCompile" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtCompileAction" prefHeight="70.0" prefWidth="108.0" text="compilar [F7]">
+                <Button fx:id="btnCompilar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnCompilarAction" prefHeight="70.0" prefWidth="108.0" text="compilar [F7]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/compilar.png" />
                         </ImageView>
                    </graphic>
                 </Button>
-                <Button fx:id="btTeam" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtTeamAction" prefHeight="70.0" prefWidth="108.0" text="equipe [F1]">
+                <Button fx:id="btnEquipe" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnEquipeAction" prefHeight="70.0" prefWidth="108.0" text="equipe [F1]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/equipe.png" />
@@ -75,7 +74,7 @@
         </ToolBar>
     </top>
     <bottom>
-        <Label fx:id="lFileName" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="900.0" text="Label" BorderPane.alignment="BOTTOM_LEFT">
+        <Label fx:id="lFileName" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="900.0" BorderPane.alignment="BOTTOM_LEFT">
             <BorderPane.margin>
                 <Insets left="10.0" />
             </BorderPane.margin></Label>
@@ -83,8 +82,8 @@
     <center>
         <SplitPane dividerPositions="0.5" orientation="VERTICAL" BorderPane.alignment="CENTER">
             <items>
-                <TextArea fx:id="taInput" prefHeight="900.0" prefWidth="900.0" />
-                <TextArea fx:id="taMsg" layoutX="10.0" layoutY="10.0" prefHeight="900.0" prefWidth="900.0" />
+                <TextArea fx:id="txtaInput" prefHeight="900.0" prefWidth="900.0" />
+                <TextArea fx:id="txtaDebug" layoutX="10.0" layoutY="10.0" prefHeight="900.0" prefWidth="900.0" />
             </items>
         </SplitPane>
     </center>
