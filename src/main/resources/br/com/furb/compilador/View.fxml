@@ -15,7 +15,7 @@
                 <Button fx:id="btNew" mnemonicParsing="false" onAction="#onBtNewAction" prefHeight="70.0" prefWidth="108.0" text="novo [ctrl-n]" />
                 <Button fx:id="btOpen" mnemonicParsing="false" onAction="#onBtOpenAction" prefHeight="70.0" prefWidth="108.0" text="abrir [ctrl-o]" />
                 <Button fx:id="btSave" mnemonicParsing="false" onAction="#onBtSaveAction" prefHeight="70.0" prefWidth="108.0" text="salvar [ctrl-s]" />
-                <Button fx:id="btCopy" mnemonicParsing="false" onAction="#onBtCopyAction" prefHeight="70.0" prefWidth="108.0" text="copiar [ctrl-s]" />
+                <Button fx:id="btCopy" mnemonicParsing="false" onAction="#onBtCopyAction" prefHeight="70.0" prefWidth="108.0" text="copiar [ctrl-c]" />
                 <Button fx:id="btPaste" mnemonicParsing="false" onAction="#onBtPasteAction" prefHeight="70.0" prefWidth="108.0" text="colar [ctrl-v]" />
                 <Button fx:id="btCut" mnemonicParsing="false" onAction="#onBtCutAction" prefHeight="70.0" prefWidth="108.0" text="recortar [ctrl-x]" />
                 <Button fx:id="btCompile" mnemonicParsing="false" onAction="#onBtCompileAction" prefHeight="70.0" prefWidth="108.0" text="compilar [F7]" />
