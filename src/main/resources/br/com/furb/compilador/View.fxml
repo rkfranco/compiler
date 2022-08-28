@@ -82,8 +82,8 @@
     <center>
         <SplitPane dividerPositions="0.5" orientation="VERTICAL" BorderPane.alignment="CENTER">
             <items>
-                <TextArea fx:id="txtaInput" prefHeight="900.0" prefWidth="900.0" />
-                <TextArea fx:id="txtaDebug" layoutX="10.0" layoutY="10.0" prefHeight="900.0" prefWidth="900.0" />
+                <TextArea fx:id="txtaInput" prefHeight="900.0" prefWidth="900.0" stylesheets="@Style.css" />
+                <TextArea fx:id="txtaDebug" layoutX="10.0" layoutY="10.0" prefHeight="900.0" prefWidth="900.0" stylesheets="@Style.css" />
             </items>
         </SplitPane>
     </center>

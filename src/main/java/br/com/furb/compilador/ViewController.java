@@ -2,6 +2,7 @@ package br.com.furb.compilador;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.stage.DirectoryChooser;
@@ -28,7 +29,8 @@ public class ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // initialize here...
+        System.out.println(txtaDebug.getCssMetaData());
+        txtaDebug.setEditable(false);
     }
 
     @FXML
@@ -77,7 +79,6 @@ public class ViewController implements Initializable {
     public Button btnSalvar;
 
     public void onBtnSalvarAction() {
-        System.out.println("Salvar");
         boolean sucessSaveFile;
         if (filePath == "") {
             String newFileName = "";
@@ -87,7 +88,6 @@ public class ViewController implements Initializable {
             dialog.setContentText("Nome do arquivo:");
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent()) {
-                System.out.println("Nome do arquivo: " + result.get());
                 newFileName = result.get() + ".txt";
                 String newFilePath = getNewFilePath();
                 sucessSaveFile = saveFile(newFilePath + "/" + newFileName);
@@ -140,7 +140,6 @@ public class ViewController implements Initializable {
     public Button btnCopiar;
 
     public void onBtnCopiarAction() {
-        System.out.println("Copiar");
         content.putString(txtaInput.getText());
         clipboard.setContent(content);
     }
@@ -164,7 +163,6 @@ public class ViewController implements Initializable {
     public Button btnRecortar;
 
     public void onBtnRecortarAction() {
-        System.out.println("Recortar");
         onBtnCopiarAction();
         txtaInput.clear();
     }
@@ -173,20 +171,14 @@ public class ViewController implements Initializable {
     public Button btnCompilar;
 
     public void onBtnCompilarAction() {
-        sendDebugMessage("Compilação de programas ainda não foi implementada\n");
+        txtaDebug.appendText("Compilação de programas ainda não foi implementada\n");
     }
 
     @FXML
     public Button btnEquipe;
 
     public void onBtnEquipeAction() {
-        sendDebugMessage("Alunos que desenvolveram este compilador: \nRodrigo Kapulka Franco \nGustavo Baroni Bruder\n");
-    }
-
-    public void sendDebugMessage(String msg) {
-        String debug = txtaDebug.getText();
-        debug += msg;
-        txtaDebug.setText(debug);
+        txtaDebug.appendText("Alunos que desenvolveram este compilador: \nRodrigo Kapulka Franco \nGustavo Baroni Bruder\n");
     }
 
     private final KeyCombination keyBtnNovo = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN);
