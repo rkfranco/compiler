@@ -1,14 +1,12 @@
 package br.com.furb.compilador;
 
 import javafx.application.Application;
-import javafx.css.Style;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 public class Main extends Application {
     @Override
