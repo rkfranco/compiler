@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.*;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import org.fxmisc.flowless.VirtualizedScrollPane;
@@ -23,8 +22,6 @@ public class ViewController implements Initializable {
     private String filePath = "";
     private String nameFile;
 
-    @FXML
-    private BorderPane window;
     @FXML
     private CodeArea codeInput;
 

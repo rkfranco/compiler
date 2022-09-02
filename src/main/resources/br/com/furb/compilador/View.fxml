@@ -14,7 +14,7 @@
 <?import org.fxmisc.flowless.VirtualizedScrollPane?>
 <?import org.fxmisc.richtext.CodeArea?>
 
-<BorderPane fx:id="window" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
             prefHeight="600.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="br.com.furb.compilador.ViewController">
     <bottom>
