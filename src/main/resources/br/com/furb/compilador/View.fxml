@@ -10,6 +10,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 
+
+<?import org.fxmisc.flowless.VirtualizedScrollPane?>
+<?import org.fxmisc.richtext.CodeArea?>
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="910.0" prefHeight="600.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.furb.compilador.ViewController">
     <top>
         <ToolBar prefHeight="70.0" prefWidth="900.0" BorderPane.alignment="CENTER">
@@ -82,7 +85,11 @@
     <center>
         <SplitPane dividerPositions="0.5" orientation="VERTICAL" BorderPane.alignment="CENTER">
             <items>
-                <TextArea fx:id="txtaInput" prefHeight="900.0" prefWidth="900.0" stylesheets="@Style.css" />
+                   <VirtualizedScrollPane fx:id="virtualScroll" layoutX="130.0" layoutY="5.0" minHeight="380.0" minWidth="750.0">
+                       <content>
+                           <CodeArea fx:id="codeInput" />
+                       </content>
+                   </VirtualizedScrollPane>
                 <TextArea fx:id="txtaDebug" layoutX="10.0" layoutY="10.0" prefHeight="900.0" prefWidth="900.0" stylesheets="@Style.css" />
             </items>
         </SplitPane>

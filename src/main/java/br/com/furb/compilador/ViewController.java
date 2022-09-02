@@ -2,24 +2,30 @@ package br.com.furb.compilador;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import org.fxmisc.flowless.VirtualizedScrollPane;
+import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.LineNumberFactory;
 
 import java.io.*;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+
+@SuppressWarnings("restriction")
 public class ViewController implements Initializable {
-    final Clipboard clipboard = Clipboard.getSystemClipboard();
-    final ClipboardContent content = new ClipboardContent();
     private String filePath = "";
     private String nameFile;
     @FXML
-    private TextArea txtaInput;
+    private CodeArea codeInput;
+
+    @FXML
+    private VirtualizedScrollPane<CodeArea> virtualScroll;
 
     @FXML
     private TextArea txtaDebug;
@@ -29,7 +35,12 @@ public class ViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(txtaDebug.getCssMetaData());
+        // Ativa a contagem de linhas e sua exibição no CodeArea
+        codeInput.setParagraphGraphicFactory(LineNumberFactory.get(codeInput));
+
+        virtualScroll.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+        virtualScroll.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+
         txtaDebug.setEditable(false);
     }
 
@@ -38,7 +49,7 @@ public class ViewController implements Initializable {
 
     public void onBtnNovoAction() {
         filePath = "";
-        txtaInput.clear();
+        codeInput.clear();
         txtaDebug.clear();
         lFileName.setText("");
     }
@@ -53,8 +64,8 @@ public class ViewController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             nameFile = selectedFile.getName();
-            lFileName.setText(nameFile);
-            filePath = selectedFile.getPath();
+            filePath = selectedFile.getAbsolutePath();
+            lFileName.setText(filePath);
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
                 String linha = bufferedReader.readLine(), codigo = "";
                 while (true) {
@@ -65,8 +76,8 @@ public class ViewController implements Initializable {
                     }
                     linha = bufferedReader.readLine();
                 }
-                txtaDebug.clear();
-                txtaInput.setText(codigo);
+                codeInput.clear();
+                codeInput.appendText(codigo);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {
@@ -122,7 +133,7 @@ public class ViewController implements Initializable {
 
     public boolean saveFile(String path) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
-            bufferedWriter.append(txtaInput.getText());
+            bufferedWriter.append(codeInput.getText());
         } catch (FileNotFoundException e) {
             return false;
         } catch (IOException e) {
@@ -140,31 +151,21 @@ public class ViewController implements Initializable {
     public Button btnCopiar;
 
     public void onBtnCopiarAction() {
-        content.putString(txtaInput.getText());
-        clipboard.setContent(content);
+        codeInput.copy();
     }
 
     @FXML
     public Button btnColar;
 
     public void onBtnColarAction() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmar");
-        alert.setHeaderText("Você deseja continuar?");
-        alert.setContentText("Você substituirá todo o texto pelo o que se encontra na área de transferência de seu computador");
-        alert.setHeight(500);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            txtaInput.setText(clipboard.getString());
-        }
+        codeInput.paste();
     }
 
     @FXML
     public Button btnRecortar;
 
     public void onBtnRecortarAction() {
-        onBtnCopiarAction();
-        txtaInput.clear();
+        codeInput.cut();
     }
 
     @FXML
