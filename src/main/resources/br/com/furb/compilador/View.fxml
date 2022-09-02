@@ -28,7 +28,7 @@
         <ToolBar prefHeight="70.0" minWidth="900" prefWidth="910.0" BorderPane.alignment="CENTER">
             <items>
                 <Button fx:id="btnNovo" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnNovoAction"
-                        prefHeight="70.0" prefWidth="108.0" text="novo [ctrl-n]">
+                        prefHeight="70.0" prefWidth="105.0" text="novo [ctrl-n]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/novo.png"/>
@@ -36,7 +36,7 @@
                     </graphic>
                 </Button>
                 <Button fx:id="btnAbrir" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnAbrirAction"
-                        prefHeight="70.0" prefWidth="108.0" text="abrir [ctrl-o]">
+                        prefHeight="70.0" prefWidth="105.0" text="abrir [ctrl-o]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/abrir.png"/>
@@ -44,7 +44,7 @@
                     </graphic>
                 </Button>
                 <Button fx:id="btnSalvar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnSalvarAction"
-                        prefHeight="70.0" prefWidth="108.0" text="salvar [ctrl-s]">
+                        prefHeight="70.0" prefWidth="105.0" text="salvar [ctrl-s]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/salvar.png"/>
@@ -52,7 +52,7 @@
                     </graphic>
                 </Button>
                 <Button fx:id="btnCopiar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnCopiarAction"
-                        prefHeight="70.0" prefWidth="108.0" text="copiar [ctrl-c]">
+                        prefHeight="70.0" prefWidth="105.0" text="copiar [ctrl-c]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/copiar.png"/>
@@ -60,7 +60,7 @@
                     </graphic>
                 </Button>
                 <Button fx:id="btnColar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnColarAction"
-                        prefHeight="70.0" prefWidth="108.0" text="colar [ctrl-v]">
+                        prefHeight="70.0" prefWidth="105.0" text="colar [ctrl-v]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/colar.png"/>
@@ -68,7 +68,7 @@
                     </graphic>
                 </Button>
                 <Button fx:id="btnRecortar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnRecortarAction"
-                        prefHeight="70.0" prefWidth="108.0" text="recortar [ctrl-x]">
+                        prefHeight="70.0" prefWidth="105.0" text="recortar [ctrl-x]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/recortar.png"/>
@@ -76,7 +76,7 @@
                     </graphic>
                 </Button>
                 <Button fx:id="btnCompilar" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnCompilarAction"
-                        prefHeight="70.0" prefWidth="108.0" text="compilar [F7]">
+                        prefHeight="70.0" prefWidth="105.0" text="compilar [F7]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/compilar.png"/>
@@ -84,7 +84,7 @@
                     </graphic>
                 </Button>
                 <Button fx:id="btnEquipe" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnEquipeAction"
-                        prefHeight="70.0" prefWidth="108.0" text="equipe [F1]">
+                        prefHeight="70.0" prefWidth="105.0" text="equipe [F1]">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@./imagens/equipe.png"/>
