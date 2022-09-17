@@ -1,0 +1,35 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Compilador">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="br.com.furb.compilador.Main" />
+        <option name="description" value="" />
+        <option name="height" value="600" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+        <option name="width" value="910" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Compilador.jar">
+        <element id="module-output" name="Compilador" />
+      </element>
+      <element id="library" level="project" name="Maven: org.fxmisc.flowless:flowless:0.6.9" />
+      <element id="library" level="project" name="Maven: org.fxmisc.richtext:richtextfx:0.10.9" />
+      <element id="library" level="project" name="Maven: org.fxmisc.undo:undofx:2.1.1" />
+      <element id="library" level="project" name="Maven: org.fxmisc.wellbehaved:wellbehavedfx:0.3.3" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:17.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:17.0.2" />
+      <element id="library" level="project" name="Maven: org.reactfx:reactfx:2.0-M5" />
+    </root>
+  </artifact>
+</component>
