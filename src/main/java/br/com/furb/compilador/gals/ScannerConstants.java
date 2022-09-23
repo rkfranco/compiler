@@ -1252,7 +1252,7 @@ public interface ScannerConstants
         "constante int inválida",
         "",
         "",
-        "Erro identificando identificador",
+        "identificador inválido",
         "comentário de bloco inválido ou não finalizado",
         "",
         "",

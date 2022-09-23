@@ -45,7 +45,7 @@ public class AnalisadorLexicoTests {
         assertEquals("linha     classe                        lexema", linhas[0]);
         assertEquals("1         identificador                 test1", linhas[1]);
         assertEquals("1         identificador                 test2", linhas[2]);
-        assertEquals("programa compilado com sucesso", linhas[3]);
+        assertEquals("programa compilado com sucesso", linhas[4]);
     }
 
     @Test

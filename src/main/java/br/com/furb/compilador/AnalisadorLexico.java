@@ -34,7 +34,11 @@ public class AnalisadorLexico {
                     .append(token.getLexeme())
                     .append(this.quebraLinha);
             }
-            saida.append("programa compilado com sucesso").append(this.quebraLinha);
+
+            saida
+                .append(this.quebraLinha)
+                .append("programa compilado com sucesso")
+                .append(this.quebraLinha);
         } catch (LexicalError e) {
             saida = new StringBuilder()
                 .append("Erro na linha ")

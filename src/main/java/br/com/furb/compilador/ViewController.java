@@ -177,14 +177,14 @@ public class ViewController implements Initializable {
 
     public void onBtnCompilarAction() {
         String saida = this.analisadorLexico.analisar(this.codeInput);
-        txtaDebug.appendText(saida);
+        txtaDebug.setText(saida);
     }
 
     @FXML
     public Button btnEquipe;
 
     public void onBtnEquipeAction() {
-        txtaDebug.appendText("Alunos que desenvolveram este compilador: \nRodrigo Kapulka Franco \nGustavo Baroni Bruder\n");
+        txtaDebug.setText("Alunos que desenvolveram este compilador: \nRodrigo Kapulka Franco \nGustavo Baroni Bruder\n");
     }
 
     private final KeyCombination keyBtnNovo = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN);
