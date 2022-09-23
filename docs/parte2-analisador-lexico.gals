@@ -1,0 +1,92 @@
+#Options
+GenerateScanner = true
+GenerateParser = false
+Language = Java
+ScannerName = Lexico
+ScannerCaseSensitive = true
+ScannerTable = Compact
+Input = String
+#RegularDefinitions
+min: [a-z]
+mai: [A-Z]
+letra: {min} | {mai}
+
+dig: [0-9]
+dif_zero: [1-9]
+
+comentariolinha: # (.)*
+comentariobloco: \[ \n ([^ \[ \] ])* \n \]
+#Tokens
+// alunos:
+// Gustavo Baroni Bruder
+// Rodrigo Kapulka Franco
+
+identificador: ( {min} | {mai} )+ ( _? ( {min} | {mai} ) | _? {dig} )*
+
+cint: {dig}* {dif_zero} d {dif_zero} {dig}* | {dig}+
+
+cfloat: ({dig}+)? \. ({dig}* ({dif_zero} d {dif_zero} {dig}*) | {dig}+)
+
+cchar: \\(n|s|t)
+
+cstring: \" ([^ \" \n \\])* \"
+
+// comentariolinha: # (.)*
+
+// comentariobloco: \[ \n ([^ \[ \] ])* \n \]
+
+
+boolean = identificador : "boolean"
+break = identificador : "break"
+char = identificador : "char"
+do = identificador : "do"
+else = identificador : "else"
+end = identificador : "end"
+false = identificador : "false"
+float = identificador : "float"
+fun = identificador : "fun"
+if = identificador : "if"
+int = identificador : "int"
+main = identificador : "main"
+print = identificador : "print"
+println = identificador : "println"
+readln = identificador : "readln"
+string = identificador : "string"
+true = identificador : "true"
+val = identificador : "val"
+var = identificador : "var"
+while = identificador : "while"
+
+//simbolos especiais
+
+":"
+","
+";"
+"="
+")"
+"("
+"{"
+"}"
+"=="
+"<"
+">"
+"+"
+"-"
+"*"
+"/"
+"%"
+"!="
+"&&"
+"||"
+"!"
+"++"
+"--"
+
+// ignorar caracteres de formatacao
+:[\s\n\t]
+
+// ignorar comentario de linha
+:!{comentariolinha}
+
+// ignorar comentario de bloco
+:!{comentariobloco}
