@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class AnalisadorLexicoTests {
+public class AnalisadorCodigoTests {
 
     private final String quebraLinha = System.lineSeparator();
 
@@ -22,11 +22,11 @@ public class AnalisadorLexicoTests {
     @Mock
     CaretSelectionBind caretSelectionBind;
 
-    AnalisadorLexico analisadorLexico;
+    AnalisadorCodigo analisadorCodigo;
 
     @BeforeEach
     void setUp() {
-        this.analisadorLexico = new AnalisadorLexico();
+        this.analisadorCodigo = new AnalisadorCodigo();
     }
 
     private void Entrada(String entrada) {
@@ -39,7 +39,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarEExibirCabecalhoERodapeCorretamente() {
         Entrada("test1\ntest2");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("linha     classe                        lexema", linhas[0]);
@@ -52,7 +52,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarIdentificador() {
         Entrada("a\nA\na_a\na_A\na_1\na_a_aa\na_1_a\na_1_A");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("1         identificador                 a", linhas[1]);
@@ -69,7 +69,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarConstanteInt() {
         Entrada("1\n12\n123\n1d1\n2d9\n12d21\n102d210");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("1         constante int                 1", linhas[1]);
@@ -85,7 +85,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarConstanteFloat() {
         Entrada(".1\n.1289\n.1d1\n.901d109\n1.8d9\n56.8d9");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("1         constante float               .1", linhas[1]);
@@ -100,7 +100,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarConstanteChar() {
         Entrada("\\n\\s\\t");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("1         constante char                \\n", linhas[1]);
@@ -112,7 +112,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarConstanteString() {
         Entrada("\"test\"\n\"12345\"\n\"test123\"");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("1         constante string              \"test\"", linhas[1]);
@@ -124,7 +124,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarPalavraReservada() {
         Entrada("boolean\nbreak\nchar\ndo\nelse\nend\nfalse\nfloat\nfun\nif\nint\nmain\nprint\nprintln\nreadln\nstring\ntrue\nval\nvar\nwhile\n");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("1         palavra reservada             boolean", linhas[1]);
@@ -153,7 +153,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarSimboloEspecial() {
         Entrada(":\n,\n;\n=\n)\n(\n{\n}\n==\n<\n>\n+\n-\n*\n/\n%\n!=\n&&\n||\n!\n++\n--\n");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("1         símbolo especial              :", linhas[1]);
@@ -184,7 +184,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarComentariosDeLinhaEIgnorar() {
         Entrada("test#comentario de linha aaa bbb 123\n123");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("1         identificador                 test", linhas[1]);
@@ -195,7 +195,7 @@ public class AnalisadorLexicoTests {
     public void deveAnalisarComentariosDeBlocoEIgnorar() {
         Entrada("test[\ncomentario de bloco\n]123");
 
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
 
         assertEquals("1         identificador                 test", linhas[1]);
@@ -205,17 +205,17 @@ public class AnalisadorLexicoTests {
     @Test
     public void deveExibirErroAoAnalisarConstanteChar() {
         Entrada("\\r");
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - constante char inválida", linhas[0]);
 
         Entrada("\\u");
-        saida = this.analisadorLexico.analisar(this.codeArea);
+        saida = this.analisadorCodigo.analisar(this.codeArea);
         linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - constante char inválida", linhas[0]);
 
         Entrada("\\w");
-        saida = this.analisadorLexico.analisar(this.codeArea);
+        saida = this.analisadorCodigo.analisar(this.codeArea);
         linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - constante char inválida", linhas[0]);
     }
@@ -223,17 +223,17 @@ public class AnalisadorLexicoTests {
     @Test
     public void deveExibirErroAoAnalisarConstanteString() {
         Entrada("\"te\nst\"");
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - constante string inválida ou não finalizada", linhas[0]);
 
         Entrada("\"123\\45\"");
-        saida = this.analisadorLexico.analisar(this.codeArea);
+        saida = this.analisadorCodigo.analisar(this.codeArea);
         linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - constante string inválida ou não finalizada", linhas[0]);
 
         Entrada("\"tes\\t123\"");
-        saida = this.analisadorLexico.analisar(this.codeArea);
+        saida = this.analisadorCodigo.analisar(this.codeArea);
         linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - constante string inválida ou não finalizada", linhas[0]);
     }
@@ -241,12 +241,12 @@ public class AnalisadorLexicoTests {
     @Test
     public void deveExibirErroAoAnalisarSimboloInvalido() {
         Entrada("@");
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - @ símbolo inválido", linhas[0]);
 
         Entrada("$");
-        saida = this.analisadorLexico.analisar(this.codeArea);
+        saida = this.analisadorCodigo.analisar(this.codeArea);
         linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - $ símbolo inválido", linhas[0]);
     }
@@ -254,12 +254,12 @@ public class AnalisadorLexicoTests {
     @Test
     public void deveExibirErroAoAnalisarComentarioDeBlocoInvalido() {
         Entrada("test[\ncomentario de bloco\n123");
-        String saida = this.analisadorLexico.analisar(this.codeArea);
+        String saida = this.analisadorCodigo.analisar(this.codeArea);
         String[] linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - comentário de bloco inválido ou não finalizado", linhas[0]);
 
         Entrada("test[comentario de bloco\n]123");
-        saida = this.analisadorLexico.analisar(this.codeArea);
+        saida = this.analisadorCodigo.analisar(this.codeArea);
         linhas = saida.split(this.quebraLinha);
         assertEquals("Erro na linha 1 - comentário de bloco inválido ou não finalizado", linhas[0]);
     }

@@ -2,7 +2,6 @@ package br.com.furb.compilador;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.*;
@@ -17,13 +16,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import br.com.furb.compilador.gals.*;
-
 @SuppressWarnings("restriction")
 public class ViewController implements Initializable {
     private String filePath = "";
     private String nameFile;
-    private final AnalisadorLexico analisadorLexico = new AnalisadorLexico();
+    private final AnalisadorCodigo analisadorCodigo = new AnalisadorCodigo();
 
     @FXML
     private CodeArea codeInput;
@@ -176,7 +173,7 @@ public class ViewController implements Initializable {
     public Button btnCompilar;
 
     public void onBtnCompilarAction() {
-        String saida = this.analisadorLexico.analisar(this.codeInput);
+        String saida = this.analisadorCodigo.analisar(this.codeInput);
         txtaDebug.setText(saida);
     }
 
