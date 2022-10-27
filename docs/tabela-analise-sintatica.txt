@@ -1,0 +1,40 @@
+<programa>: fun
+<expressao>: identificador, cint, cfloat, cchar, cstring, false, true, "(", "+", "-", "!"
+<lista_instrucoes>: identificador, break, do, if, print, println, readln, val, var
+<aux_lista_instrucoes>: identificador, break, do, if, print, println, readln, val, var, "}"
+<aux_listas>: identificador, break, do, if, print, println, readln, val, var
+<aux_lista_comandos>: identificador, break, do, if, print, println, readln
+<aux_lista_constantes>: val
+<aux_lista_variaveis>: var
+<aux_constantes>: val
+<aux_variaveis>: var
+<declaracao_constantes>: val
+<declaracao_variaveis>: var
+<aux_declaracao>: ":", "="
+<aux_declaracao_>: ";", "="
+<lista_identificadores>: identificador
+<lista_identificadores_>: ":", ",", "=", ")"
+<tipo>: boolean, char, float, int, string
+<valor>: cint, cfloat, cchar, cstring, false, true
+<comando>: identificador, break, do, if, print, println, readln
+<cmd_atribuicao>: identificador
+<cmd_entrada>: readln
+<cmd_saida>: print, println
+<cmd_selecao>: if
+<cmd_selecao_>: else, end
+<cmd_repeticao>: do
+<op_cstring>: identificador, cstring
+<lista_comandos>: identificador, break, do, if, print, println, readln
+<lista_comandos_>: identificador, break, do, else, end, if, print, println, readln, while
+<lista_expressoes>: identificador, cint, cfloat, cchar, cstring, false, true, "(", "+", "-", "!"
+<lista_expressoes_>: ",", ")"
+<expressao_>: ",", ";", ")", "&&", "||"
+<elemento>: identificador, cint, cfloat, cchar, cstring, false, true, "(", "+", "-", "!"
+<relacional>: identificador, cint, cfloat, cchar, cstring, "(", "+", "-"
+<relacional_>: ",", ";", ")", "==", "<", ">", "!=", "&&", "||"
+<operador_relacional>: "==", "<", ">", "!="
+<aritmetica>: identificador, cint, cfloat, cchar, cstring, "(", "+", "-"
+<aritmetica_>: ",", ";", ")", "==", "<", ">", "+", "-", "!=", "&&", "||"
+<termo>: identificador, cint, cfloat, cchar, cstring, "(", "+", "-"
+<termo_>: ",", ";", ")", "==", "<", ">", "+", "-", "*", "/", "%", "!=", "&&", "||"
+<fator>: identificador, cint, cfloat, cchar, cstring, "(", "+", "-"
