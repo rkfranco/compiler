@@ -51,7 +51,7 @@ public interface ParserConstants
         { -1, 78, 79, 80, 81, 82, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 83, -1, -1, -1, -1, -1, 84, 85, -1, -1, -1, -1, -1, -1, -1 }
     };
 
-    int[][] PRODUCTIONS = 
+    int[][] PRODUCTIONS =
     {
         { 15, 18, 33, 49, 34 },
         { 51 },
@@ -238,15 +238,34 @@ public interface ParserConstants
         "esperado !",
         //"<programa> inv�lido",
         "esperado fun",
-        "<expressao> inv�lido",
-        "<lista_instrucoes> inv�lido",
-        "<aux_lista_instrucoes> inv�lido",
-        "<aux_listas> inv�lido",
-        "<aux_lista_comandos> inv�lido",
-        "<aux_lista_constantes> inv�lido",
-        "<aux_lista_variaveis> inv�lido",
-        "<aux_constantes> inv�lido",
-        "<aux_variaveis> inv�lido",
+
+        //"<expressao> inv�lido",
+        "esperado expressão",
+
+        //"<lista_instrucoes> inv�lido",
+        "esperado identificador, break, do, if, print, println, readln, val, var",
+
+        //"<aux_lista_instrucoes> inv�lido",
+        "esperado identificador, break, do, if, print, println, readln, val, var, \"}\"",
+
+        //"<aux_listas> inv�lido",
+        "esperado identificador, break, do, if, print, println, readln, val, var",
+
+        //"<aux_lista_comandos> inv�lido",
+        "esperado identificador, break, do, if, print, println, readln",
+
+        //"<aux_lista_constantes> inv�lido",
+        "esperado val",
+
+        //"<aux_lista_variaveis> inv�lido",
+        "esperado var",
+
+        //"<aux_constantes> inv�lido",
+        "esperado val",
+
+        //"<aux_variaveis> inv�lido",
+        "esperado var",
+
         "<declaracao_constantes> inv�lido",
         //"<declaracao_variaveis> inv�lido",
         "esperado var",
@@ -255,34 +274,81 @@ public interface ParserConstants
         //"<aux_declaracao_> inv�lido",
         "esperado ; =",
         //"<lista_identificadores> inv�lido",
-            "esperado id",
+        "esperado id",
        //"<lista_identificadores_> inv�lido",
-            "esperado : , )",
-        "<tipo> inv�lido",
-        "<valor> inv�lido",
-        "<comando> inv�lido",
-        "<cmd_atribuicao> inv�lido",
-        "<cmd_entrada> inv�lido",
-        "<cmd_saida> inv�lido",
-        "<cmd_selecao> inv�lido",
-        "<cmd_selecao_> inv�lido",
-        "<cmd_repeticao> inv�lido",
-        "<op_cstring> inv�lido",
-        "<lista_comandos> inv�lido",
-        "<lista_comandos_> inv�lido",
+        " esperado : , ) =",
+
+        //"<tipo> inv�lido",
+        "esperado boolean, char, float, int, string",
+
+        //"<valor> inv�lido",
+        "esperado cint, cfloat, cchar, cstring, false, true",
+
+        //"<comando> inv�lido",
+        "esperado identificador, break, do, if, print, println, readln",
+
+        //"<cmd_atribuicao> inv�lido",
+        "esperado identificador",
+
+        //"<cmd_entrada> inv�lido",
+        "esperado readln",
+
+        //"<cmd_saida> inv�lido",
+        "esperado print, println",
+
+        //"<cmd_selecao> inv�lido",
+        "esperado if",
+
+        //"<cmd_selecao_> inv�lido",
+        "esperado else, end",
+
+        //"<cmd_repeticao> inv�lido",
+        "esperado do",
+
+        // "<op_cstring> inv�lido",
+        "esperado identificador, cstring",
+
+        //"<lista_comandos> inv�lido",
+        "esperado identificador, break, do, if, print, println, readln",
+
+        //"<lista_comandos_> inv�lido",
+        "esperado identificador, break, do, else, end, if, print, println, readln, while",
+
         //"<lista_expressoes> inv�lido",
         "esperado expressão",
-        "<lista_expressoes_> inv�lido",
+
+        //"<lista_expressoes_> inv�lido",
+        //"esperado \",\", \")\"", -> Duvida
+        "esperado expressão",
+
         //"<expressao_> inv�lido",
         "esperado expressão",
-        "<elemento> inv�lido",
-        "<relacional> inv�lido",
-        "<relacional_> inv�lido",
-        "<operador_relacional> inv�lido",
-        "<aritmetica> inv�lido",
-        "<aritmetica_> inv�lido",
-        "<termo> inv�lido",
-        "<termo_> inv�lido",
-        "<fator> inv�lido"
+
+        //"<elemento> inv�lido",
+        "esperado expressão",
+
+        //"<relacional> inv�lido",
+        "esperado expressão",
+
+        //"<relacional_> inv�lido",
+        "esperado expressão",
+
+        //"<operador_relacional> inv�lido",
+        "esperado \"==\", \"<\", \">\", \"!=\"",
+
+        //"<aritmetica> inv�lido",
+        "esperado expressão",
+
+        //"<aritmetica_> inv�lido",
+        "esperado expressão",
+
+        //"<termo> inv�lido",
+        "esperado expressão",
+
+        //"<termo_> inv�lido",
+        "esperado expressão",
+
+        //"<fator> inv�lido"
+        "esperado expressão"
     };
 }
