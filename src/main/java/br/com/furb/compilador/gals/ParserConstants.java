@@ -243,16 +243,16 @@ public interface ParserConstants
         "esperado expressão",
 
         //"<lista_instrucoes> inv�lido",
-        "esperado identificador, break, do, if, print, println, readln, val, var",
+        "esperado id break do if print println readln val var",
 
         //"<aux_lista_instrucoes> inv�lido",
-        "esperado identificador, break, do, if, print, println, readln, val, var, \"}\"",
+        "esperado id break do if print println readln val var }",
 
         //"<aux_listas> inv�lido",
-        "esperado identificador, break, do, if, print, println, readln, val, var",
+        "esperado id break do if print println readln val var",
 
         //"<aux_lista_comandos> inv�lido",
-        "esperado identificador, break, do, if, print, println, readln",
+        "esperado id break do if print println readln",
 
         //"<aux_lista_constantes> inv�lido",
         "esperado val",
@@ -266,53 +266,59 @@ public interface ParserConstants
         //"<aux_variaveis> inv�lido",
         "esperado var",
 
-        "<declaracao_constantes> inv�lido",
+        //"<declaracao_constantes> inv�lido",
+        "esperado val",
+
         //"<declaracao_variaveis> inv�lido",
         "esperado var",
+
         //"<aux_declaracao> inv�lido",
         "esperado : =",
+
         //"<aux_declaracao_> inv�lido",
         "esperado ; =",
+
         //"<lista_identificadores> inv�lido",
         "esperado id",
+
        //"<lista_identificadores_> inv�lido",
         " esperado : , ) =",
 
         //"<tipo> inv�lido",
-        "esperado boolean, char, float, int, string",
+        "esperado boolean char float int string",
 
         //"<valor> inv�lido",
-        "esperado cint, cfloat, cchar, cstring, false, true",
+        "esperado constante int constante float constante char constante string false true",
 
         //"<comando> inv�lido",
-        "esperado identificador, break, do, if, print, println, readln",
+        "esperado id break do if print println readln",
 
         //"<cmd_atribuicao> inv�lido",
-        "esperado identificador",
+        "esperado id",
 
         //"<cmd_entrada> inv�lido",
         "esperado readln",
 
         //"<cmd_saida> inv�lido",
-        "esperado print, println",
+        "esperado print println",
 
         //"<cmd_selecao> inv�lido",
         "esperado if",
 
         //"<cmd_selecao_> inv�lido",
-        "esperado else, end",
+        "esperado else end",
 
         //"<cmd_repeticao> inv�lido",
         "esperado do",
 
         // "<op_cstring> inv�lido",
-        "esperado identificador, cstring",
+        "esperado id constante string",
 
         //"<lista_comandos> inv�lido",
-        "esperado identificador, break, do, if, print, println, readln",
+        "esperado id break do if print println readln",
 
         //"<lista_comandos_> inv�lido",
-        "esperado identificador, break, do, else, end, if, print, println, readln, while",
+        "esperado id break do else end if print println readln while",
 
         //"<lista_expressoes> inv�lido",
         "esperado expressão",
@@ -334,7 +340,7 @@ public interface ParserConstants
         "esperado expressão",
 
         //"<operador_relacional> inv�lido",
-        "esperado \"==\", \"<\", \">\", \"!=\"",
+        "esperado == < > !=",
 
         //"<aritmetica> inv�lido",
         "esperado expressão",
