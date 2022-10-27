@@ -22,10 +22,13 @@ public class AnalisadorLexico {
     public String analisar(CodeArea entrada) {
         this.lexico.setInput(entrada.getText());
         StringBuilder saida = new StringBuilder()
-                .append(padRight("linha", 10))
+                .append("programa compilado com sucesso");
+                /*
+                 .append(padRight("linha", 10))
                 .append(padRight("classe", 30))
                 .append("lexema")
                 .append(this.quebraLinha);
+                 */
         try {
             sintatico.parse(lexico, semantico);    // tradução dirigida pela sintaxe
         }
