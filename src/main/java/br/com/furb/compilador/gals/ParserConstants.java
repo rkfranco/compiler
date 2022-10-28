@@ -145,7 +145,7 @@ public interface ParserConstants
     {
         "",
         // "Era esperado fim de programa",
-        "esperado fim de programa",
+        "esperado EOF",
         // "Era esperado identificador",
         "esperado identificador",
         // "Era esperado cint",
@@ -236,125 +236,125 @@ public interface ParserConstants
         "esperado ||",
         // "Era esperado \"!\"",
         "esperado !",
-        //"<programa> inv�lido",
+        //"<programa> inválido",
         "esperado fun",
 
-        //"<expressao> inv�lido",
+        //"<expressao> inválido",
         "esperado expressão",
 
-        //"<lista_instrucoes> inv�lido",
+        //"<lista_instrucoes> inválido",
         "esperado id break do if print println readln val var",
 
-        //"<aux_lista_instrucoes> inv�lido",
+        //"<aux_lista_instrucoes> inválido",
         "esperado id break do if print println readln val var }",
 
-        //"<aux_listas> inv�lido",
+        //"<aux_listas> inválido",
         "esperado id break do if print println readln val var",
 
-        //"<aux_lista_comandos> inv�lido",
+        //"<aux_lista_comandos> inválido",
         "esperado id break do if print println readln",
 
-        //"<aux_lista_constantes> inv�lido",
+        //"<aux_lista_constantes> inválido",
         "esperado val",
 
-        //"<aux_lista_variaveis> inv�lido",
+        //"<aux_lista_variaveis> inválido",
         "esperado var",
 
-        //"<aux_constantes> inv�lido",
+        //"<aux_constantes> inválido",
         "esperado val",
 
-        //"<aux_variaveis> inv�lido",
+        //"<aux_variaveis> inválido",
         "esperado var",
 
-        //"<declaracao_constantes> inv�lido",
+        //"<declaracao_constantes> inválido",
         "esperado val",
 
-        //"<declaracao_variaveis> inv�lido",
+        //"<declaracao_variaveis> inválido",
         "esperado var",
 
-        //"<aux_declaracao> inv�lido",
+        //"<aux_declaracao> inválido",
         "esperado : =",
 
-        //"<aux_declaracao_> inv�lido",
+        //"<aux_declaracao_> inválido",
         "esperado ; =",
 
-        //"<lista_identificadores> inv�lido",
+        //"<lista_identificadores> inválido",
         "esperado id",
 
-       //"<lista_identificadores_> inv�lido",
+       //"<lista_identificadores_> inválido",
         " esperado : , ) =",
 
-        //"<tipo> inv�lido",
+        //"<tipo> inválido",
         "esperado boolean char float int string",
 
-        //"<valor> inv�lido",
+        //"<valor> inválido",
         "esperado constante int constante float constante char constante string false true",
 
-        //"<comando> inv�lido",
+        //"<comando> inválido",
         "esperado id break do if print println readln",
 
-        //"<cmd_atribuicao> inv�lido",
+        //"<cmd_atribuicao> inválido",
         "esperado id",
 
-        //"<cmd_entrada> inv�lido",
+        //"<cmd_entrada> inválido",
         "esperado readln",
 
-        //"<cmd_saida> inv�lido",
+        //"<cmd_saida> inválido",
         "esperado print println",
 
-        //"<cmd_selecao> inv�lido",
+        //"<cmd_selecao> inválido",
         "esperado if",
 
-        //"<cmd_selecao_> inv�lido",
+        //"<cmd_selecao_> inválido",
         "esperado else end",
 
-        //"<cmd_repeticao> inv�lido",
+        //"<cmd_repeticao> inválido",
         "esperado do",
 
-        // "<op_cstring> inv�lido",
+        // "<op_cstring> inválido",
         "esperado id constante string",
 
-        //"<lista_comandos> inv�lido",
+        //"<lista_comandos> inválido",
         "esperado id break do if print println readln",
 
-        //"<lista_comandos_> inv�lido",
+        //"<lista_comandos_> inválido",
         "esperado id break do else end if print println readln while",
 
-        //"<lista_expressoes> inv�lido",
+        //"<lista_expressoes> inválido",
         "esperado expressão",
 
-        //"<lista_expressoes_> inv�lido",
+        //"<lista_expressoes_> inválido",
         //"esperado \",\", \")\"", -> Duvida
         "esperado expressão",
 
-        //"<expressao_> inv�lido",
+        //"<expressao_> inválido",
         "esperado expressão",
 
-        //"<elemento> inv�lido",
+        //"<elemento> inválido",
         "esperado expressão",
 
-        //"<relacional> inv�lido",
+        //"<relacional> inválido",
         "esperado expressão",
 
-        //"<relacional_> inv�lido",
+        //"<relacional_> inválido",
         "esperado expressão",
 
-        //"<operador_relacional> inv�lido",
+        //"<operador_relacional> inválido",
         "esperado == < > !=",
 
-        //"<aritmetica> inv�lido",
+        //"<aritmetica> inválido",
         "esperado expressão",
 
-        //"<aritmetica_> inv�lido",
+        //"<aritmetica_> inválido",
         "esperado expressão",
 
-        //"<termo> inv�lido",
+        //"<termo> inválido",
         "esperado expressão",
 
-        //"<termo_> inv�lido",
+        //"<termo_> inválido",
         "esperado expressão",
 
-        //"<fator> inv�lido"
+        //"<fator> inválido"
         "esperado expressão"
     };
 }

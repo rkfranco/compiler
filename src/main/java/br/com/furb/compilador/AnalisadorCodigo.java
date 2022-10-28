@@ -45,7 +45,7 @@ public class AnalisadorCodigo {
             // Tratar erros semânticos
         }
 
-        return saida.toString();
+        return saida.toString().replace("$", "EOF");
     }
 
     private int obterLinha(CodeArea entrada, int position) {
