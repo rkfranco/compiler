@@ -1,0 +1,244 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = true
+ScannerTable = Compact
+Input = String
+Parser = LL
+#RegularDefinitions
+min: [a-z]
+mai: [A-Z]
+letra: {min} | {mai}
+
+dig: [0-9]
+dif_zero: [1-9]
+
+comentariolinha: # (.)*
+comentariobloco: \[ \n ([^ \[ \] ])* \n \]
+#Tokens
+// alunos:
+// Gustavo Baroni Bruder
+// Rodrigo Kapulka Franco
+
+identificador: ( {min} | {mai} )+ ( _? ( {min} | {mai} ) | _? {dig} )*
+
+cint: {dig}* {dif_zero} d {dif_zero} {dig}* | {dig}+
+
+cfloat: ({dig}+)? \. ({dig}* ({dif_zero} d {dif_zero} {dig}*) | {dig}+)
+
+cchar: \\(n|s|t)
+
+cstring: \" ([^ \" \n \\])* \"
+
+// comentariolinha: # (.)*
+
+// comentariobloco: \[ \n ([^ \[ \] ])* \n \]
+
+
+boolean = identificador : "boolean"
+break = identificador : "break"
+char = identificador : "char"
+do = identificador : "do"
+else = identificador : "else"
+end = identificador : "end"
+false = identificador : "false"
+float = identificador : "float"
+fun = identificador : "fun"
+if = identificador : "if"
+int = identificador : "int"
+main = identificador : "main"
+print = identificador : "print"
+println = identificador : "println"
+readln = identificador : "readln"
+string = identificador : "string"
+true = identificador : "true"
+val = identificador : "val"
+var = identificador : "var"
+while = identificador : "while"
+
+//simbolos especiais
+
+":"
+","
+";"
+"="
+")"
+"("
+"{"
+"}"
+"=="
+"<"
+">"
+"+"
+"-"
+"*"
+"/"
+"%"
+"!="
+"&&"
+"||"
+"!"
+// "++"
+// "--"
+
+// ignorar caracteres de formatacao
+:[\s\n\t]
+
+// ignorar comentario de linha
+:!{comentariolinha}
+
+// ignorar comentario de bloco
+:!{comentariobloco}
+#NonTerminals
+// alunos:
+// Gustavo Baroni Bruder
+// Rodrigo Kapulka Franco
+
+<programa>
+
+<expressao>
+
+<lista_instrucoes>
+<aux_lista_instrucoes>
+
+<aux_listas>
+
+<aux_lista_comandos>
+<aux_lista_constantes>
+<aux_lista_variaveis>
+
+<aux_constantes>
+//<aux_constantes_>
+<aux_variaveis>
+//<aux_variaveis_>
+
+<declaracao_constantes>
+<declaracao_variaveis>
+<aux_declaracao>
+<aux_declaracao_>
+
+<lista_identificadores>
+<lista_identificadores_>
+
+<tipo>
+<valor>
+
+<comando>
+
+<cmd_atribuicao>
+<cmd_entrada>
+<cmd_saida>
+<cmd_selecao>
+<cmd_selecao_>
+<cmd_repeticao>
+
+<op_cstring>
+<lista_comandos>
+<lista_comandos_>
+<lista_expressoes>
+<lista_expressoes_>
+
+
+<expressao_>
+<elemento>
+<relacional>
+<relacional_>
+<operador_relacional>
+<aritmetica>
+<aritmetica_>
+<termo>
+<termo_>
+<fator>
+#Grammar
+//equipe 08: Gustavo Baroni Bruder, Rodrigo Kapulka Franco
+//NOTA: 10,0
+
+<programa> ::= fun main "{" <lista_instrucoes> "}" ;
+
+<lista_instrucoes> ::= <aux_listas> ;
+<aux_lista_instrucoes> ::= <aux_listas> | Ó ;
+
+<aux_listas> ::= <aux_lista_comandos> | <aux_lista_constantes> | <aux_lista_variaveis> ;
+
+//<aux_lista_comandos> ::= <lista_comandos> <aux_lista_instrucoes> ;
+//para poder implementar o analisador sint√°tico, necess√°rio trocar por: <---------------------
+<aux_lista_comandos> ::= <comando> <aux_lista_instrucoes> ;
+
+<aux_lista_constantes> ::= <aux_constantes> <aux_lista_instrucoes> ;
+<aux_lista_variaveis> ::= <aux_variaveis> <aux_lista_instrucoes> ;
+
+//<aux_constantes> ::= <declaracao_constantes> <aux_constantes_> ;
+//<aux_constantes_> ::= √Æ | <aux_constantes> ;
+//para poder implementar o analisador sint√°tico, necess√°rio trocar por: <---------------------
+<aux_constantes> ::= <declaracao_constantes>  ;
+
+//<aux_variaveis> ::= <declaracao_variaveis> <aux_variaveis_> ;
+//<aux_variaveis_> ::= √Æ | <aux_variaveis> ;
+//para poder implementar o analisador sint√°tico, necess√°rio trocar por: <---------------------
+<aux_variaveis> ::= <declaracao_variaveis> ;
+
+
+
+<declaracao_constantes> ::= val <lista_identificadores> <aux_declaracao> ";" ;
+<declaracao_variaveis> ::= var <lista_identificadores> <aux_declaracao> ";" ;
+<aux_declaracao> ::=  ":" <tipo> <aux_declaracao_> |  "=" <valor> ;
+<aux_declaracao_> ::= Ó | "=" <valor> ;
+
+<lista_identificadores> ::= identificador <lista_identificadores_>  ;
+<lista_identificadores_> ::= Ó | "," <lista_identificadores> ;
+
+<tipo> ::= int | float | char | string | boolean ;
+<valor> ::= cint | cfloat | cchar | cstring | true | false ;
+
+<comando> ::= <cmd_atribuicao> | <cmd_entrada> | <cmd_saida> | <cmd_selecao> | <cmd_repeticao> | break ";" ;
+
+<cmd_atribuicao> ::= identificador "=" <expressao> ";" ;
+
+<cmd_entrada> ::= readln "(" <op_cstring> <lista_identificadores>  ")" ";" ;
+
+//<cmd_saida> ::= print "(" <lista_expressoes> ")" | println "(" <lista_expressoes> ")" ";" ;
+//trocar por:
+<cmd_saida> ::= print "(" <lista_expressoes> ")" ";" | println "(" <lista_expressoes> ")" ";" ;
+
+//<cmd_selecao> ::= if "(" <expressao> ")" <lista_comandos> else <lista_comandos> end ";" ;
+//trocar por:
+<cmd_selecao> ::= if "(" <expressao> ")" <lista_comandos> <cmd_selecao_> end ";" ;
+<cmd_selecao_> ::= Ó | else <lista_comandos> ;
+
+<cmd_repeticao> ::= do <lista_comandos> while "(" <expressao> ")" end ";" ;
+
+<op_cstring> ::= cstring "," | Ó ;
+<lista_comandos> ::= <comando> <lista_comandos_> ;
+<lista_comandos_> ::= Ó | <lista_comandos> ;
+<lista_expressoes> ::= <expressao> <lista_expressoes_> ;
+<lista_expressoes_> ::= Ó | "," <lista_expressoes> ;
+
+
+<expressao> ::= <elemento> <expressao_> ;
+<expressao_> ::= Ó | "&&" <elemento> <expressao_> | "||" <elemento> <expressao_> ;
+<elemento> ::= <relacional> | true | false | "!" <elemento> ;
+
+<relacional> ::= <aritmetica> <relacional_> ;
+<relacional_> ::= Ó | <operador_relacional> <aritmetica> ;
+<operador_relacional> ::= "==" | "!=" | "<" | ">" ;
+
+<aritmetica> ::= <termo> <aritmetica_> ;
+<aritmetica_> ::= Ó | "+" <termo> <aritmetica_> | "-" <termo> <aritmetica_> ;
+
+<termo> ::= <fator> <termo_> ;
+<termo_> ::= Ó | "*" <fator> <termo_>
+	      | "/" <fator> <termo_>
+	      | "%" <fator> <termo_> ;
+
+<fator> ::= identificador |
+	   cint |
+	   cfloat |
+	   cchar |
+	   cstring |
+	   "(" <expressao> ")" |
+	   "+" <fator> |
+	   "-" <fator> ;
