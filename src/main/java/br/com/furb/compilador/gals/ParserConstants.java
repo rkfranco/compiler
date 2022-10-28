@@ -147,7 +147,7 @@ public interface ParserConstants
         // "Era esperado fim de programa",
         "esperado EOF",
         // "Era esperado identificador",
-        "esperado identificador",
+        "esperado id",
         // "Era esperado cint",
         "esperado constante int",
         // "Era esperado cfloat",
@@ -324,7 +324,6 @@ public interface ParserConstants
         "esperado expressão",
 
         //"<lista_expressoes_> inválido",
-        //"esperado \",\", \")\"", -> Duvida
         "esperado expressão",
 
         //"<expressao_> inválido",

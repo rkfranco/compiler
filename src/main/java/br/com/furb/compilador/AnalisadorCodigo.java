@@ -49,7 +49,11 @@ public class AnalisadorCodigo {
     }
 
     private int obterLinha(CodeArea entrada, int position) {
-        entrada.selectRange(position, position);
+        try {
+            entrada.selectRange(position, position);
+        } catch (IndexOutOfBoundsException e) {
+            entrada.selectRange(0, 0);
+        }
         return entrada.getCaretSelectionBind().getParagraphIndex() + 1;
     }
 
