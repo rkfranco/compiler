@@ -149,13 +149,17 @@ public interface ParserConstants
         // "Era esperado identificador",
         "esperado id",
         // "Era esperado cint",
-        "esperado constante int",
+        // "esperado constante int",
+        "esperado constante_int",
         // "Era esperado cfloat",
-        "esperado constante float",
+        // "esperado constante float",
+        "esperado constante_float",
         // "Era esperado cchar",
-        "esperado constante char",
+        // "esperado constante char",
+        "esperado constante_char",
         // "Era esperado cstring",
-        "esperado constante string",
+        // "esperado constante string",
+        "esperado constante_string",
         // "Era esperado boolean",
         "esperado boolean",
         // "Era esperado break",
@@ -288,7 +292,8 @@ public interface ParserConstants
         "esperado boolean char float int string",
 
         //"<valor> inválido",
-        "esperado constante int constante float constante char constante string false true",
+        //"esperado constante int constante float constante char constante string false true",
+        "esperado constante_int constante_float constante_char constante_string false true",
 
         //"<comando> inválido",
         "esperado id break do if print println readln",
@@ -312,7 +317,8 @@ public interface ParserConstants
         "esperado do",
 
         // "<op_cstring> inválido",
-        "esperado id constante string",
+        // "esperado id constante string",
+        "esperado id constante_string",
 
         //"<lista_comandos> inválido",
         "esperado id break do if print println readln",
@@ -324,7 +330,8 @@ public interface ParserConstants
         "esperado expressão",
 
         //"<lista_expressoes_> inválido",
-        "esperado expressão",
+        //"esperado expressão",
+        "esperado , )",
 
         //"<expressao_> inválido",
         "esperado expressão",
