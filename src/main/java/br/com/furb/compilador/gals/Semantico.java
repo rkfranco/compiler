@@ -6,7 +6,6 @@ public class Semantico implements Constants {
 
     private final Stack<String> typeStack = new Stack<>();
     private final StringBuilder code = new StringBuilder();
-
     private String operator = "";
     private final String CFLOAT = "float64";
     private final String CINT = "int64";
@@ -15,6 +14,7 @@ public class Semantico implements Constants {
     public void executeAction(int action, Token token) throws SemanticError {
         String tipo1 = "";
         String tipo2 = "";
+
         switch (action) {
             case 1:
                 verifyType(tipo1, tipo2);
@@ -49,7 +49,7 @@ public class Semantico implements Constants {
                         .append("conv.r8");
                 break;
             case 6:
-                typeStack.push("float64");
+                typeStack.push(CFLOAT);
                 code.append("\n")
                         .append("ldc.r8")
                         .append("\n")
