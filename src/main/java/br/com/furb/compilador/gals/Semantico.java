@@ -1,12 +1,19 @@
 package br.com.furb.compilador.gals;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class Semantico implements Constants {
 
     private final Stack<String> typeStack = new Stack<>();
+    private final LinkedList<String> listaid = new LinkedList<>();
     private final StringBuilder code = new StringBuilder();
+
+    private final HashMap<String, String> TS = new HashMap<>();
+
     private String operator = "";
+    private String tipovar = "";
     private final String CFLOAT = "float64";
     private final String CINT = "int64";
     private final String CBOOL = "bool";
@@ -153,7 +160,61 @@ public class Semantico implements Constants {
                 break;
             case 22:
                 break;
-
+            case 30:
+                if (token.getLexeme().equals("int")) {
+                    tipovar = CINT;
+                } else if (token.getLexeme().equals("real")) {
+                    tipovar = CFLOAT;
+                }
+                break;
+            case 31:
+                for (String id : listaid) {
+                    TS.put(id, tipovar);
+                    code.append("\n.locals(").append(tipovar).append(" ").append(id).append(")");
+                }
+                listaid.clear();
+                break;
+            case 32:
+                listaid.add(token.getLexeme());
+                break;
+            case 33:
+                String id = token.getLexeme();
+                String tipoid = TS.get(id);
+                typeStack.push(tipoid);
+                code.append("\nldloc ").append(id);
+                if (tipoid.equals(CINT)) {
+                    code.append("\nconv.r8");
+                }
+                break;
+            case 34:
+                String id2 = listaid.pop();
+                String tipoid2 = TS.get(id2);
+                typeStack.pop();
+                if (tipoid2.equals(CINT)) {
+                    code.append("\nconv.r8");
+                }
+                code.append("\nstloc ")
+                        .append(id2);
+                break;
+            case 35:
+                for (String id3 : listaid) {
+                    String tipoid3 = TS.get(id3);
+                    String classe = "";
+                    if (tipoid3.equals(CINT)) {
+                        classe = "Int64";
+                    } else if (tipoid3.equals(CFLOAT)) {
+                        classe = "Double";
+                    }
+                    code.append("\ncall string [mscorlib]System.Console::ReadLine()")
+                            .append("\ncall ")
+                            .append(tipoid3)
+                            .append(" [mscorlib]System.")
+                            .append(classe)
+                            .append("::Parse(string)").append("\nstloc ")
+                            .append(id3);
+                }
+                listaid.clear();
+                break;
         }
         System.out.println(code);
         System.out.println(typeStack);
