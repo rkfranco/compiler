@@ -9,13 +9,15 @@ public class Semantico implements Constants {
     private final Stack<String> typeStack = new Stack<>();
     private final LinkedList<String> listaid = new LinkedList<>();
     private final StringBuilder code = new StringBuilder();
-
+    private static final String QUEBRA_LINHA = System.lineSeparator();
     private final HashMap<String, String> TS = new HashMap<>();
-
+    private final Stack<String> rotuleStack = new Stack<>();
     private String operator = "";
     private String tipovar = "";
     private final String CFLOAT = "float64";
     private final String CINT = "int64";
+    private final String CCHAR = "char";
+    private final String CSTRING = "string";
     private final String CBOOL = "bool";
 
     public void executeAction(int action, Token token) throws SemanticError {
@@ -24,55 +26,50 @@ public class Semantico implements Constants {
 
         switch (action) {
             case 1:
-                verifyType(tipo1, tipo2);
-                code.append("\nadd");
+                verifyNumberType();
+                code.append(QUEBRA_LINHA).append("add");
                 break;
             case 2:
-                verifyType(tipo1, tipo2);
-                code.append("\nsub");
+                verifyNumberType();
+                code.append(QUEBRA_LINHA).append("sub");
                 break;
             case 3:
-                verifyType(tipo1, tipo2);
-                code.append("\nmul");
+                verifyNumberType();
+                code.append(QUEBRA_LINHA).append("mul");
                 break;
             case 4:
                 tipo1 = typeStack.pop();
                 tipo2 = typeStack.pop();
 
-                if (tipo1.equals(tipo2)) {
-                    typeStack.push(tipo1);
-                } else {
-                    throw new SemanticError("Banana exception");
-                    //TODO: implementar mensagem de erro
-                }
-                code.append("\ndiv");
+                verifyDivision(tipo1, tipo2);
+                code.append(QUEBRA_LINHA).append("div");
                 break;
             case 5:
                 typeStack.push(CINT);
-                code.append("\n")
+                code.append(QUEBRA_LINHA)
                         .append("ldc.i8 ")
-                        .append(token.getLexeme())
-                        .append("\n")
+                        .append(token.getLexeme()).append(QUEBRA_LINHA)
                         .append("conv.r8");
                 break;
             case 6:
                 typeStack.push(CFLOAT);
-                code.append("\n")
-                        .append("ldc.r8")
-                        .append("\n")
+                code.append(QUEBRA_LINHA)
+                        .append("ldc.r8").append(QUEBRA_LINHA)
                         .append(token.getLexeme());
                 break;
             case 7:
+                tipo1 = typeStack.pop();
                 verifyIsNumType(tipo1);
                 break;
             case 8:
+                tipo1 = typeStack.pop();
                 verifyIsNumType(tipo1);
-                code.append("\n")
+                code.append(QUEBRA_LINHA)
                         .append("ldc.i8 ")
                         .append(-1)
-                        .append("\n")
+                        .append(QUEBRA_LINHA)
                         .append("conv.r8")
-                        .append("\n")
+                        .append(QUEBRA_LINHA)
                         .append("mul");
                 break;
             case 9:
@@ -90,44 +87,39 @@ public class Semantico implements Constants {
                 }
                 switch (operator) {
                     case ">":
-                        code.append("\ncgt");
+                        code.append(QUEBRA_LINHA).append("cgt");
                         break;
                     case "<":
-                        code.append("\nclt");
+                        code.append(QUEBRA_LINHA).append("clt");
                         break;
                     case "==":
-                        code.append("\nceq");
+                        code.append(QUEBRA_LINHA).append("ceq");
                         break;
                 }
                 break;
             case 11:
                 typeStack.push(CBOOL);
-                code.append("\nldc.i4.1");
+                code.append(QUEBRA_LINHA).append("ldc.i4.1");
                 break;
             case 12:
                 typeStack.push(CBOOL);
-                code.append("\nldc.i4.0");
+                code.append(QUEBRA_LINHA).append("ldc.i4.0");
                 break;
             case 13:
                 tipo1 = typeStack.pop();
-                if (tipo1.equals(CBOOL)) {
-                    typeStack.push(CBOOL);
-                } else {
-                    throw new SemanticError("Banana Exception");
-                    //TODO: implementar mensagem de erro
-                }
-                code.append("\n")
+                verifyBool(tipo1);
+                code.append(QUEBRA_LINHA)
                         .append("ldc.i4.1")
-                        .append("\n")
+                        .append(QUEBRA_LINHA)
                         .append("xor");
                 break;
             case 14:
                 tipo1 = typeStack.pop();
 
                 if (tipo1.equals(CINT)) {
-                    code.append("\nconv.i8");
+                    code.append(QUEBRA_LINHA).append("conv.i8");
                 }
-                code.append("\n")
+                code.append(QUEBRA_LINHA)
                         .append("call void ")
                         .append("[mscorlib]")
                         .append("System.Console::Write(")
@@ -135,30 +127,85 @@ public class Semantico implements Constants {
                         .append(")");
                 break;
             case 15:
-                code.append(".assembly extern mscorlib {}\n")
-                        .append(".assembly _codigo_objeto{}\n")
-                        .append(".module   _codigo_objeto.exe\n")
-                        .append("\n")
-                        .append(".class public _UNICA{ \n")
-                        .append(".method static public void _principal() {\n")
+                code.append(".assembly extern mscorlib {}")
+                        .append(QUEBRA_LINHA)
+                        .append(".assembly _codigo_objeto{}")
+                        .append(QUEBRA_LINHA)
+                        .append(".module   _codigo_objeto.exe")
+                        .append(QUEBRA_LINHA)
+                        .append(QUEBRA_LINHA)
+                        .append(".class public _UNICA{ ")
+                        .append(QUEBRA_LINHA)
+                        .append(".method static public void _principal() {")
+                        .append(QUEBRA_LINHA)
                         .append(".entrypoint");
                 break;
             case 16:
-                code.append("\nret")
-                        .append("\n}")
-                        .append("\n}");
+                code.append(QUEBRA_LINHA)
+                        .append("ret")
+                        .append(QUEBRA_LINHA)
+                        .append("}")
+                        .append(QUEBRA_LINHA)
+                        .append("}");
                 break;
             case 17:
+                code.append("ldstr ")
+                        .append(QUEBRA_LINHA)
+                        .append("call void ")
+                        .append(QUEBRA_LINHA)
+                        .append("[mscorlib]System.Console::Write(string)");
                 break;
             case 18:
+                tipo1 = typeStack.pop();
+                tipo2 = typeStack.pop();
+                verifyBool(tipo1, tipo2);
+                code.append(QUEBRA_LINHA).append("and");
                 break;
             case 19:
+                tipo1 = typeStack.pop();
+                tipo2 = typeStack.pop();
+                verifyBool(tipo1, tipo2);
+                code.append(QUEBRA_LINHA).append("or");
                 break;
             case 20:
+                tipo1 = typeStack.pop();
+                tipo2 = typeStack.pop();
+
+                verifyDivision(tipo1, tipo2);
+                code.append(QUEBRA_LINHA)
+                        .append("div")
+                        .append(QUEBRA_LINHA)
+                        .append("conv.i8");
                 break;
             case 21:
+                typeStack.push(CCHAR);
+                code.append(QUEBRA_LINHA);
+                switch (token.getLexeme()) {
+                    case "\\n":
+                        code.append("\"\\n\"");
+                        break;
+                    case "\\s":
+                        code.append("\" \"");
+                        break;
+                    case "\\t":
+                        code.append("\"\\t\"");
+                        break;
+                }
                 break;
             case 22:
+                typeStack.push(CSTRING);
+                code.append(QUEBRA_LINHA).append("ldstr ").append("\"").append(token.getLexeme()).append("\"");
+                break;
+            case 24:
+               // code.append(QUEBRA_LINHA).append("brfalse ").append(TS.get());
+                break;
+            case 25:
+                break;
+            case 26:
+                break;
+            case 27:
+                break;
+            case 28:
                 break;
             case 30:
                 if (token.getLexeme().equals("int")) {
@@ -170,7 +217,12 @@ public class Semantico implements Constants {
             case 31:
                 for (String id : listaid) {
                     TS.put(id, tipovar);
-                    code.append("\n.locals(").append(tipovar).append(" ").append(id).append(")");
+                    code.append(QUEBRA_LINHA)
+                            .append(".locals(")
+                            .append(tipovar)
+                            .append(" ")
+                            .append(id)
+                            .append(")");
                 }
                 listaid.clear();
                 break;
@@ -181,9 +233,9 @@ public class Semantico implements Constants {
                 String id = token.getLexeme();
                 String tipoid = TS.get(id);
                 typeStack.push(tipoid);
-                code.append("\nldloc ").append(id);
+                code.append(QUEBRA_LINHA).append("ldloc ").append(id);
                 if (tipoid.equals(CINT)) {
-                    code.append("\nconv.r8");
+                    code.append(QUEBRA_LINHA).append("conv.r8");
                 }
                 break;
             case 34:
@@ -191,9 +243,9 @@ public class Semantico implements Constants {
                 String tipoid2 = TS.get(id2);
                 typeStack.pop();
                 if (tipoid2.equals(CINT)) {
-                    code.append("\nconv.r8");
+                    code.append(QUEBRA_LINHA).append("conv.r8");
                 }
-                code.append("\nstloc ")
+                code.append(QUEBRA_LINHA).append("stloc ")
                         .append(id2);
                 break;
             case 35:
@@ -205,25 +257,50 @@ public class Semantico implements Constants {
                     } else if (tipoid3.equals(CFLOAT)) {
                         classe = "Double";
                     }
-                    code.append("\ncall string [mscorlib]System.Console::ReadLine()")
-                            .append("\ncall ")
+                    code.append(QUEBRA_LINHA).append("call string [mscorlib]System.Console::ReadLine()").append(QUEBRA_LINHA).append("call ")
                             .append(tipoid3)
                             .append(" [mscorlib]System.")
                             .append(classe)
-                            .append("::Parse(string)").append("\nstloc ")
+                            .append("::Parse(string)").append(QUEBRA_LINHA).append("stloc ")
                             .append(id3);
                 }
                 listaid.clear();
                 break;
         }
         System.out.println(code);
-        System.out.println(typeStack);
         //System.out.println("Ação #" + action + ", Token: " + token);
     }
 
-    private void verifyType(String type1, String type2) {
-        type1 = typeStack.pop();
-        type2 = typeStack.pop();
+    private void verifyBool(String tipo1) throws SemanticError {
+        if (tipo1.equals(CBOOL)) {
+            typeStack.push(CBOOL);
+        } else {
+            throw new SemanticError("tipo(s) incompatível(is) em expressão lógica");
+        }
+    }
+
+    private void verifyBool(String tipo1, String tipo2) throws SemanticError {
+        if (tipo1.equals(CBOOL) && tipo2.equals(CBOOL)) {
+            typeStack.push(CBOOL);
+        } else {
+            throw new SemanticError("tipo(s) incompatível(is) em expressão lógica");
+        }
+    }
+
+    private void verifyDivision(String tipo1, String tipo2) throws SemanticError {
+        if (tipo1.equals(tipo2)) {
+            typeStack.push(tipo1);
+        } else {
+            throw new SemanticError("tipo(s) incompatível(is) em expressão aritmética");
+        }
+    }
+
+    private void verifyNumberType() throws SemanticError {
+        String type1 = typeStack.pop();
+        String type2 = typeStack.pop();
+
+        verifyIsNumType(type1);
+        verifyIsNumType(type2);
 
         if (type1.equals(CFLOAT) || type2.equals(CFLOAT)) {
             typeStack.push(CFLOAT);
@@ -233,13 +310,10 @@ public class Semantico implements Constants {
     }
 
     private void verifyIsNumType(String type) throws SemanticError {
-        type = typeStack.pop();
-
         if (type.equals(CFLOAT) || type.equals(CINT)) {
             typeStack.push(type);
         } else {
-            throw new SemanticError("Banana exception");
-            //TODO: Implementar mensagem de erro
+            throw new SemanticError("tipo(s) incompatível(is) em expressão aritmética");
         }
     }
 
