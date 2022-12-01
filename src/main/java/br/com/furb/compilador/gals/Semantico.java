@@ -11,7 +11,7 @@ public class Semantico implements Constants {
     private final StringBuilder code = new StringBuilder();
     private static final String QUEBRA_LINHA = System.lineSeparator();
     private final HashMap<String, String> TS = new HashMap<>();
-    private final Stack<String> rotuleStack = new Stack<>();
+    private final Stack<String> labelStack = new Stack<>();
     private String operator = "";
     private String tipovar = "";
     private final String CFLOAT = "float64";
@@ -19,6 +19,7 @@ public class Semantico implements Constants {
     private final String CCHAR = "char";
     private final String CSTRING = "string";
     private final String CBOOL = "bool";
+    private int labelCount = 0;
 
     public void executeAction(int action, Token token) throws SemanticError {
         String tipo1 = "";
@@ -196,12 +197,22 @@ public class Semantico implements Constants {
                 typeStack.push(CSTRING);
                 code.append(QUEBRA_LINHA).append("ldstr ").append("\"").append(token.getLexeme()).append("\"");
                 break;
+                // TODO: VERIFICAR SELEÇÂO E REPETIÇÂO
             case 24:
-               // code.append(QUEBRA_LINHA).append("brfalse ").append(TS.get());
+                code.append(QUEBRA_LINHA)
+                        .append("brfalse ")
+                        .append(this.createLabel());
                 break;
             case 25:
+                code.append(QUEBRA_LINHA)
+                        .append("br ")
+                        .append(this.createLabel())
+                        .append(QUEBRA_LINHA)
+                        .append(this.labelStack.pop())
+                        .append(":");
                 break;
             case 26:
+                code.append(QUEBRA_LINHA).append(this.labelStack.pop()).append(":");
                 break;
             case 27:
                 break;
@@ -285,6 +296,13 @@ public class Semantico implements Constants {
         } else {
             throw new SemanticError("tipo(s) incompatível(is) em expressão lógica");
         }
+    }
+
+    private String createLabel() {
+        String label = "label_";
+        label += this.labelCount;
+        this.labelStack.push(label);
+        return label;
     }
 
     private void verifyDivision(String tipo1, String tipo2) throws SemanticError {
