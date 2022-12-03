@@ -5,21 +5,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.*;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 
-import java.io.*;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 @SuppressWarnings("restriction")
 public class ViewController implements Initializable {
-    private String filePath = "";
-    private String nameFile;
+
+    private final GerenciadorArquivo gerenciadorArquivo = new GerenciadorArquivo();
     private final AnalisadorCodigo analisadorCodigo = new AnalisadorCodigo();
 
     @FXML
@@ -49,7 +45,7 @@ public class ViewController implements Initializable {
     public Button btnNovo;
 
     public void onBtnNovoAction() {
-        filePath = "";
+        this.gerenciadorArquivo.novoArquivo();
         codeInput.clear();
         txtaDebug.clear();
         lFileName.setText("");
@@ -59,31 +55,11 @@ public class ViewController implements Initializable {
     public Button btnAbrir;
 
     public void onBtnAbrirAction() {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(extFilter);
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            nameFile = selectedFile.getName();
-            filePath = selectedFile.getAbsolutePath();
-            lFileName.setText(filePath);
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
-                String linha = bufferedReader.readLine(), codigo = "";
-                while (true) {
-                    if (linha != null) {
-                        codigo += linha + "\n";
-                    } else {
-                        break;
-                    }
-                    linha = bufferedReader.readLine();
-                }
-                codeInput.clear();
-                codeInput.appendText(codigo);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        String conteudoArquivo = this.gerenciadorArquivo.carregarConteudoArquivo();
+        if (conteudoArquivo != null) {
+            lFileName.setText(this.gerenciadorArquivo.getPathArquivoCodigoFonte());
+            codeInput.clear();
+            codeInput.appendText(conteudoArquivo);
         }
     }
 
@@ -91,61 +67,11 @@ public class ViewController implements Initializable {
     public Button btnSalvar;
 
     public void onBtnSalvarAction() {
-        boolean sucessSaveFile;
-        if (filePath == "") {
-            String newFileName = "";
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Nome do arquivo");
-            dialog.setHeaderText("Digite o nome do novo arquivo a ser criado");
-            dialog.setContentText("Nome do arquivo:");
-            Optional<String> result = dialog.showAndWait();
-            if (result.isPresent()) {
-                newFileName = result.get() + ".txt";
-                String newFilePath = getNewFilePath();
-                sucessSaveFile = saveFile(newFilePath + "/" + newFileName);
-                saveFileFeedBack(newFilePath, newFileName, sucessSaveFile);
-            }
-        } else {
-            sucessSaveFile = saveFile(filePath);
-            saveFileFeedBack(filePath, nameFile, sucessSaveFile);
+        this.gerenciadorArquivo.salvarArquivoCodigoFonte(codeInput.getText());
+        if (this.gerenciadorArquivo.temArquivoCarregado()) {
+            lFileName.setText(this.gerenciadorArquivo.getPathArquivoCodigoFonte());
         }
         txtaDebug.clear();
-    }
-
-    public void saveFileFeedBack(String newFilePath, String newFileName, boolean sucessSaveFile) {
-        Alert feedbackAlert;
-        if (sucessSaveFile) {
-            if (filePath == "") {
-                nameFile = newFileName + ".txt";
-                filePath = newFilePath + "\\" + newFileName;
-                lFileName.setText(filePath);
-            }
-            feedbackAlert = new Alert(Alert.AlertType.INFORMATION);
-            feedbackAlert.setTitle("Arquivo salvo");
-            feedbackAlert.setHeaderText("Arquivo salvo com sucesso");
-            feedbackAlert.setContentText("Arquivo salvo em" + filePath);
-        } else {
-            feedbackAlert = new Alert(Alert.AlertType.ERROR);
-            feedbackAlert.setTitle("Erro");
-            feedbackAlert.setHeaderText("Ocorreu um erro ao salvar o arquivo");
-        }
-        feedbackAlert.showAndWait();
-    }
-
-    public boolean saveFile(String path) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
-            bufferedWriter.append(codeInput.getText());
-        } catch (FileNotFoundException e) {
-            return false;
-        } catch (IOException e) {
-            return false;
-        }
-        return true;
-    }
-
-    public String getNewFilePath() {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        return directoryChooser.showDialog(null).getPath();
     }
 
     @FXML
@@ -174,6 +100,7 @@ public class ViewController implements Initializable {
 
     public void onBtnCompilarAction() {
         String saida = this.analisadorCodigo.analisar(this.codeInput);
+        this.gerenciadorArquivo.gerarArquivoCodigoObjeto(this.analisadorCodigo.getCodigoObjeto());
         txtaDebug.setText(saida);
     }
 
