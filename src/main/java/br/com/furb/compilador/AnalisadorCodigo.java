@@ -7,20 +7,21 @@ import static br.com.furb.compilador.gals.ScannerConstants.SCANNER_ERROR;
 
 public class AnalisadorCodigo {
 
-    private final Lexico lexico;
-    private final Sintatico sintatico;
-    private final Semantico semantico;
+    private Lexico lexico;
+    private Sintatico sintatico;
+    private Semantico semantico;
     private final String quebraLinha;
 
     public AnalisadorCodigo() {
-        this.lexico = new Lexico();
-        this.sintatico = new Sintatico();
-        this.semantico = new Semantico();
         this.quebraLinha = System.lineSeparator();
     }
 
     public String analisar(CodeArea entrada) {
+        this.lexico = new Lexico();
+        this.sintatico = new Sintatico();
+        this.semantico = new Semantico();
         this.lexico.setInput(entrada.getText());
+
         StringBuilder saida = new StringBuilder().append("programa compilado com sucesso");
 
         try {
@@ -61,5 +62,9 @@ public class AnalisadorCodigo {
         return SCANNER_ERROR[0].equals(error.getMessage())
                 ? texto.charAt(error.getPosition()) + " " + error.getMessage()
                 : error.getMessage();
+    }
+
+    public String getCodigoObjeto() {
+        return this.semantico.getCodigoObjeto();
     }
 }

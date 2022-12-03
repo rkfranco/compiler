@@ -282,6 +282,10 @@ public class Semantico implements Constants {
         //System.out.println("Ação #" + action + ", Token: " + token);
     }
 
+    public String getCodigoObjeto() {
+        return this.code.toString();
+    }
+
     private void verifyBool(String tipo1) throws SemanticError {
         if (tipo1.equals(CBOOL)) {
             typeStack.push(CBOOL);
