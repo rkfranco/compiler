@@ -269,8 +269,8 @@ public class Semantico implements Constants {
                     throw new SemanticError("erro acao 35");
                 }*/
 
-                if (tipoId.equals(CINT)) {
-                    this.codigoObjeto.append(QUEBRA_LINHA).append("conv.r8");
+                if (tipoId.equals(CINT)) { // TODO: VERIFICAR
+                    this.codigoObjeto.append(QUEBRA_LINHA).append("conv.i8");
                 }
                 this.codigoObjeto.append(QUEBRA_LINHA).append("stloc ").append(id);
                 break;
