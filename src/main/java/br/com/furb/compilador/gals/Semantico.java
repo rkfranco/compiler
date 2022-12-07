@@ -140,7 +140,9 @@ public class Semantico implements Constants {
                         .append(QUEBRA_LINHA).append("}");
                 break;
             case 17:
-                codigoObjeto.append("ldstr ")
+                codigoObjeto.append(QUEBRA_LINHA)
+                        .append("ldstr ")
+                        .append("\"\\n\"")
                         .append(QUEBRA_LINHA)
                         .append("call void ")
                         .append(QUEBRA_LINHA)
@@ -184,9 +186,9 @@ public class Semantico implements Constants {
                 break;
             case 22:
                 pilhaTipos.push(CSTRING);
-                codigoObjeto.append(QUEBRA_LINHA).append("ldstr ").append("\"").append(token.getLexeme()).append("\"");
+                codigoObjeto.append(QUEBRA_LINHA).append("ldstr ").append(token.getLexeme());
                 break;
-                // TODO: VERIFICAR SELEÇÂO E REPETIÇÂO
+            // TODO: VERIFICAR SELEÇÂO E REPETIÇÂO
             case 24:
                 codigoObjeto.append(QUEBRA_LINHA)
                         .append("brfalse ")
@@ -286,7 +288,7 @@ public class Semantico implements Constants {
                     }
                     this.codigoObjeto.append(QUEBRA_LINHA).append("call string [mscorlib]System.Console::ReadLine()");
                     this.codigoObjeto.append(QUEBRA_LINHA).append("call ").append(tipoId).append(" [mscorlib]System.").append(classe).append("::Parse(string)");
-                    this.codigoObjeto.append(QUEBRA_LINHA).append("stloc ").append(id);
+                    this.codigoObjeto.append(QUEBRA_LINHA).append("stloc ").append(listaId);
                 }
                 this.listaIds.clear();
                 break;
@@ -295,8 +297,8 @@ public class Semantico implements Constants {
 
     // ok
     private void verifyNumberType(String tipo1, String tipo2) throws SemanticError {
-         verifyIsNumberType(tipo1);
-         verifyIsNumberType(tipo2);
+        verifyIsNumberType(tipo1);
+        verifyIsNumberType(tipo2);
 
         if (tipo1.equals(CFLOAT) || tipo2.equals(CFLOAT)) {
             this.pilhaTipos.push(CFLOAT);
