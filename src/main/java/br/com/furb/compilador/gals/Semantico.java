@@ -217,6 +217,9 @@ public class Semantico implements Constants {
                     case "real":
                         this.tipoVar = CFLOAT;
                         break;
+                    case "boolean":
+                        this.tipoVar = CBOOL;
+                        break;
                     default:
                         this.tipoVar = token.getLexeme();
                         break;
@@ -268,7 +271,6 @@ public class Semantico implements Constants {
                 if (!tipoId.equals(tipoExp)) {
                     throw new SemanticError("erro acao 35");
                 }*/
-
                 if (tipoId.equals(CINT)) { // TODO: VERIFICAR
                     this.codigoObjeto.append(QUEBRA_LINHA).append("conv.i8");
                 }
@@ -294,7 +296,6 @@ public class Semantico implements Constants {
                 break;
         }
     }
-
     // ok
     private void verifyNumberType(String tipo1, String tipo2) throws SemanticError {
         verifyIsNumberType(tipo1);
