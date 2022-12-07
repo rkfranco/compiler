@@ -43,7 +43,11 @@ public class AnalisadorCodigo {
                 .append(" ")
                 .append(e.getMessage());
         } catch (SemanticError e) {
-            // Tratar erros semânticos
+            saida = new StringBuilder()
+                .append("Erro na linha ")
+                .append(obterLinha(entrada, e.getPosition()))
+                .append(" - ")
+                .append(e.getMessage());
         }
 
         return saida.toString().replace("$", "EOF");
