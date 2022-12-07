@@ -303,9 +303,9 @@ public class Semantico implements Constants {
     }
 
     private String createLabel() {
-        String label = "label_";
-        label += this.labelCount;
+        String label = "label_" + this.labelCount;
         this.labelStack.push(label);
+        this.labelCount++;
         return label;
     }
 
@@ -338,5 +338,4 @@ public class Semantico implements Constants {
             throw new SemanticError("tipo(s) incompatível(is) em expressão aritmética");
         }
     }
-
 }
