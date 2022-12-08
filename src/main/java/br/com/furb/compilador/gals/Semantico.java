@@ -312,9 +312,7 @@ public class Semantico implements Constants {
 
     // ok
     private void verifyIsNumberType(String tipo1) throws SemanticError {
-        if (tipo1.equals(CFLOAT) || tipo1.equals(CINT)) {
-            return;
-        } else {
+        if (!tipo1.equals(CFLOAT) && !tipo1.equals(CINT)) {
             throw new SemanticError("tipo(s) incompatível(is) em expressão aritmética");
         }
     }
