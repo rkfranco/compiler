@@ -18,7 +18,7 @@ public class Semantico implements Constants {
     private final HashMap<String, String> tabelaSimbolos = new HashMap<>();
     private final LinkedList<String> listaIds = new LinkedList<>();
     private final Stack<String> pilhaRotulos = new Stack<>();
-    private int qtdRotulos = 0;
+    private int qtdRotulos = 1;
     private String tipoVar = "";
     private String operador = "";
 
@@ -189,21 +189,17 @@ public class Semantico implements Constants {
                 codigoObjeto.append(QUEBRA_LINHA).append("ldstr ").append(token.getLexeme());
                 break;
             // TODO: VERIFICAR SELEÇÂO E REPETIÇÂO
-            case 24:
-                codigoObjeto.append(QUEBRA_LINHA)
-                        .append("brfalse ")
-                        .append(this.criarRotulo());
+            case 24: // ok
+                this.codigoObjeto.append(QUEBRA_LINHA).append("brfalse ").append(this.criarRotulo());
                 break;
-            case 25:
-                codigoObjeto.append(QUEBRA_LINHA)
-                        .append("br ")
-                        .append(this.criarRotulo())
-                        .append(QUEBRA_LINHA)
-                        .append(this.pilhaRotulos.pop())
-                        .append(":");
+            case 25: // ok
+                String rotuloAtual = this.pilhaRotulos.pop();
+                String rotuloNovo = this.criarRotulo();
+                this.codigoObjeto.append(QUEBRA_LINHA).append("br ").append(rotuloNovo);
+                this.codigoObjeto.append(QUEBRA_LINHA).append(rotuloAtual).append(":");
                 break;
-            case 26:
-                codigoObjeto.append(QUEBRA_LINHA).append(this.pilhaRotulos.pop()).append(":");
+            case 26: // ok
+                this.codigoObjeto.append(QUEBRA_LINHA).append(this.pilhaRotulos.pop()).append(":");
                 break;
             case 27:
                 break;
@@ -349,7 +345,7 @@ public class Semantico implements Constants {
 
     // ok
     private String criarRotulo() {
-        String rotulo = "label_" + this.qtdRotulos;
+        String rotulo = "L" + this.qtdRotulos;
         this.pilhaRotulos.push(rotulo);
         this.qtdRotulos++;
         return rotulo;
