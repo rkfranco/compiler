@@ -188,7 +188,6 @@ public class Semantico implements Constants {
                 pilhaTipos.push(CSTRING);
                 codigoObjeto.append(QUEBRA_LINHA).append("ldstr ").append(token.getLexeme());
                 break;
-            // TODO: VERIFICAR SELEÇÂO E REPETIÇÂO
             case 24: // ok
                 this.codigoObjeto.append(QUEBRA_LINHA).append("brfalse ").append(this.criarRotulo());
                 break;
@@ -202,15 +201,17 @@ public class Semantico implements Constants {
                 this.codigoObjeto.append(QUEBRA_LINHA).append(this.pilhaRotulos.pop()).append(":");
                 break;
             case 27:
+                this.codigoObjeto.append(QUEBRA_LINHA).append(this.criarRotulo()).append(":");
                 break;
             case 28:
+                this.codigoObjeto.append(QUEBRA_LINHA).append("brtrue ").append(this.pilhaRotulos.pop());
                 break;
             case 30: // ok
                 switch (token.getLexeme()) {
                     case "int":
                         this.tipoVar = CINT;
                         break;
-                    case "real":
+                    case "float":
                         this.tipoVar = CFLOAT;
                         break;
                     case "boolean":
