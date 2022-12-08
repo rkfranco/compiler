@@ -60,7 +60,11 @@ public class Semantico implements Constants {
                 break;
             case 6: // ok
                 this.pilhaTipos.push(CFLOAT);
-                this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.r8 ").append(token.getLexeme());
+                String lexema = token.getLexeme();
+                if (lexema.charAt(0) == '.') {
+                    lexema = "0" + lexema;
+                }
+                this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.r8 ").append(lexema);
                 break;
             case 7: // ok
                 tipo1 = this.pilhaTipos.pop();
@@ -293,6 +297,7 @@ public class Semantico implements Constants {
                 break;
         }
     }
+
     // ok
     private void verifyNumberType(String tipo1, String tipo2) throws SemanticError {
         verifyIsNumberType(tipo1);
