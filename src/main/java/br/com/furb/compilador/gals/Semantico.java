@@ -141,14 +141,9 @@ public class Semantico implements Constants {
                         .append(QUEBRA_LINHA).append("}")
                         .append(QUEBRA_LINHA).append("}");
                 break;
-            case 17:
-                codigoObjeto.append(QUEBRA_LINHA)
-                        .append("ldstr ")
-                        .append("\"\\n\"")
-                        .append(QUEBRA_LINHA)
-                        .append("call void ")
-                        .append(QUEBRA_LINHA)
-                        .append("[mscorlib]System.Console::Write(string)");
+            case 17: // ok
+                this.codigoObjeto.append(QUEBRA_LINHA).append("ldstr ").append("\"\\n\"");
+                this.codigoObjeto.append(QUEBRA_LINHA).append("call void [mscorlib]System.Console::Write(string)");
                 break;
             case 18: // ok
                 tipo1 = this.pilhaTipos.pop();
@@ -232,7 +227,7 @@ public class Semantico implements Constants {
                     }*/
 
                     this.tabelaSimbolos.put(listaId, this.tipoVar);
-                    this.codigoObjeto.append(QUEBRA_LINHA).append(".locals(").append(this.tipoVar).append(" ").append(listaId).append(")");
+                    this.codigoObjeto.append(QUEBRA_LINHA).append(".locals (").append(this.tipoVar).append(" ").append(listaId).append(")");
                 }
                 this.listaIds.clear();
                 break;
