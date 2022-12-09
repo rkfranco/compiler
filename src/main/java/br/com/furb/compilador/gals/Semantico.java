@@ -202,10 +202,10 @@ public class Semantico implements Constants {
             case 26: // ok
                 this.codigoObjeto.append(QUEBRA_LINHA).append(this.pilhaRotulos.pop()).append(":");
                 break;
-            case 27:
+            case 27: // ok
                 this.codigoObjeto.append(QUEBRA_LINHA).append(this.criarRotulo()).append(":");
                 break;
-            case 28:
+            case 28: // ok
                 this.codigoObjeto.append(QUEBRA_LINHA).append("brtrue ").append(this.pilhaRotulos.pop());
                 break;
             case 30: // ok
@@ -268,7 +268,7 @@ public class Semantico implements Constants {
 
                 /* nao deve validar
                 if (!tipoId.equals(tipoExp)) {
-                    throw new SemanticError("erro acao 35");
+                    throw new SemanticError("erro acao 34");
                 }*/
                 if (tipoId.equals(CINT)) { // TODO: VERIFICAR
                     this.codigoObjeto.append(QUEBRA_LINHA).append("conv.i8");
