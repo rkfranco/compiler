@@ -100,7 +100,9 @@ public class ViewController implements Initializable {
 
     public void onBtnCompilarAction() {
         String saida = this.analisadorCodigo.analisar(this.codeInput);
-        this.gerenciadorArquivo.gerarArquivoCodigoObjeto(this.analisadorCodigo.getCodigoObjeto());
+        if (this.analisadorCodigo.programaCompiladoComSucesso()) {
+            this.gerenciadorArquivo.gerarArquivoCodigoObjeto(this.analisadorCodigo.getCodigoObjeto());
+        }
         txtaDebug.setText(saida);
     }
 

@@ -11,12 +11,14 @@ public class AnalisadorCodigo {
     private Sintatico sintatico;
     private Semantico semantico;
     private final String quebraLinha;
+    private boolean compiladoComSucesso;
 
     public AnalisadorCodigo() {
         this.quebraLinha = System.lineSeparator();
     }
 
     public String analisar(CodeArea entrada) {
+        this.compiladoComSucesso = true;
         this.lexico = new Lexico();
         this.sintatico = new Sintatico();
         this.semantico = new Semantico();
@@ -33,6 +35,7 @@ public class AnalisadorCodigo {
                 .append(" - ")
                 .append(formatarMensagemErro(e, entrada.getText()))
                 .append(this.quebraLinha);
+            this.compiladoComSucesso = false;
         } catch (SyntaticError e) {
             saida = new StringBuilder()
                 .append("Erro na linha ")
@@ -42,12 +45,14 @@ public class AnalisadorCodigo {
                 .append(this.sintatico.getCurrentTokenString())
                 .append(" ")
                 .append(e.getMessage());
+            this.compiladoComSucesso = false;
         } catch (SemanticError e) {
             saida = new StringBuilder()
                 .append("Erro na linha ")
                 .append(obterLinha(entrada, e.getPosition()))
                 .append(" - ")
                 .append(e.getMessage());
+            this.compiladoComSucesso = false;
         }
 
         return saida.toString().replace("$", "EOF");
@@ -66,6 +71,10 @@ public class AnalisadorCodigo {
         return SCANNER_ERROR[0].equals(error.getMessage())
                 ? texto.charAt(error.getPosition()) + " " + error.getMessage()
                 : error.getMessage();
+    }
+
+    public boolean programaCompiladoComSucesso() {
+        return this.compiladoComSucesso;
     }
 
     public String getCodigoObjeto() {
