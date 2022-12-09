@@ -55,16 +55,14 @@ public class Semantico implements Constants {
                 break;
             case 5: // ok
                 this.pilhaTipos.push(CINT);
-                this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.i8 ").append(token.getLexeme());
+                String lexemaInt = formatIntLexeme(token.getLexeme());
+                this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.i8 ").append(lexemaInt);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("conv.r8");
                 break;
             case 6: // ok
                 this.pilhaTipos.push(CFLOAT);
-                String lexema = token.getLexeme();
-                if (lexema.charAt(0) == '.') {
-                    lexema = "0" + lexema;
-                }
-                this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.r8 ").append(lexema);
+                String lexemaFloat = formatFloatLexeme(token.getLexeme());
+                this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.r8 ").append(lexemaFloat);
                 break;
             case 7: // ok
                 tipo1 = this.pilhaTipos.pop();
@@ -345,6 +343,36 @@ public class Semantico implements Constants {
         } else {
             throw new SemanticError("tipo(s) incompatível(is) em expressão lógica");
         }
+    }
+
+    private String formatIntLexeme(String lexemaInt) {
+        String[] partesInt = lexemaInt.split("d");
+        if (partesInt.length > 1) {
+            int baseMultiplicacao = Integer.parseInt(partesInt[0]);
+            int expoente = Integer.parseInt(partesInt[1]);
+
+            int resultado = (int) (baseMultiplicacao * Math.pow(10, expoente));
+            lexemaInt = String.valueOf(resultado);
+        }
+
+        return lexemaInt;
+    }
+
+    private String formatFloatLexeme(String lexemaFloat) {
+        if (lexemaFloat.charAt(0) == '.') {
+            lexemaFloat = "0" + lexemaFloat;
+        }
+
+        String[] partesFloat = lexemaFloat.split("d");
+        if (partesFloat.length > 1) {
+            double baseMultiplicacao = Double.parseDouble(partesFloat[0]);
+            int expoente = Integer.parseInt(partesFloat[1]);
+
+            double resultado = baseMultiplicacao * Math.pow(10, expoente);
+            lexemaFloat = String.valueOf(resultado);
+        }
+
+        return lexemaFloat;
     }
 
     // ok
