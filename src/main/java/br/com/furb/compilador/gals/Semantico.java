@@ -32,47 +32,47 @@ public class Semantico implements Constants {
         String tipoId = "";
 
         switch (action) {
-            case 1: // ok
+            case 1:
                 tipo1 = this.pilhaTipos.pop();
                 tipo2 = this.pilhaTipos.pop();
                 verifyNumberType(tipo1, tipo2);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("add");
                 break;
-            case 2: // ok
+            case 2:
                 tipo1 = this.pilhaTipos.pop();
                 tipo2 = this.pilhaTipos.pop();
                 verifyNumberType(tipo1, tipo2);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("sub");
                 break;
-            case 3: // ok
+            case 3:
                 tipo1 = this.pilhaTipos.pop();
                 tipo2 = this.pilhaTipos.pop();
                 verifyNumberType(tipo1, tipo2);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("mul");
                 break;
-            case 4: // ok
+            case 4:
                 tipo1 = this.pilhaTipos.pop();
                 tipo2 = this.pilhaTipos.pop();
                 verifyDivision(tipo1, tipo2);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("div");
                 break;
-            case 5: // ok
+            case 5:
                 this.pilhaTipos.push(CINT);
                 String lexemaInt = formatIntLexeme(token.getLexeme());
                 this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.i8 ").append(lexemaInt);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("conv.r8");
                 break;
-            case 6: // ok
+            case 6:
                 this.pilhaTipos.push(CFLOAT);
                 String lexemaFloat = formatFloatLexeme(token.getLexeme());
                 this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.r8 ").append(lexemaFloat);
                 break;
-            case 7: // ok
+            case 7:
                 tipo1 = this.pilhaTipos.pop();
                 verifyIsNumberType(tipo1);
                 this.pilhaTipos.push(tipo1);
                 break;
-            case 8: // ok
+            case 8:
                 tipo1 = this.pilhaTipos.pop();
                 verifyIsNumberType(tipo1);
                 this.pilhaTipos.push(tipo1);
@@ -80,10 +80,10 @@ public class Semantico implements Constants {
                 this.codigoObjeto.append(QUEBRA_LINHA).append("conv.r8");
                 this.codigoObjeto.append(QUEBRA_LINHA).append("mul");
                 break;
-            case 9: // ok
+            case 9:
                 this.operador = token.getLexeme();
                 break;
-            case 10: // ok
+            case 10:
                 tipo1 = this.pilhaTipos.pop();
                 tipo2 = this.pilhaTipos.pop();
 
@@ -105,21 +105,21 @@ public class Semantico implements Constants {
                         break;
                 }
                 break;
-            case 11: // ok
+            case 11:
                 this.pilhaTipos.push(CBOOL);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.i4.1");
                 break;
-            case 12: // ok
+            case 12:
                 this.pilhaTipos.push(CBOOL);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.i4.0");
                 break;
-            case 13: // ok
+            case 13:
                 tipo1 = this.pilhaTipos.pop();
                 verifyBool(tipo1);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("ldc.i4.1");
                 this.codigoObjeto.append(QUEBRA_LINHA).append("xor");
                 break;
-            case 14: // ok
+            case 14:
                 tipo1 = this.pilhaTipos.pop();
 
                 if (tipo1.equals(CINT)) {
@@ -128,7 +128,7 @@ public class Semantico implements Constants {
 
                 this.codigoObjeto.append(QUEBRA_LINHA).append("call void [mscorlib]System.Console::Write(").append(tipo1).append(")");
                 break;
-            case 15: // ok
+            case 15:
                 this.codigoObjeto
                         .append(".assembly extern mscorlib {}").append(QUEBRA_LINHA)
                         .append(".assembly _codigo_objeto{}").append(QUEBRA_LINHA)
@@ -138,23 +138,23 @@ public class Semantico implements Constants {
                         .append(".method static public void _principal() {").append(QUEBRA_LINHA)
                         .append(".entrypoint");
                 break;
-            case 16: // ok
+            case 16:
                 this.codigoObjeto
                         .append(QUEBRA_LINHA).append("ret")
                         .append(QUEBRA_LINHA).append("}")
                         .append(QUEBRA_LINHA).append("}");
                 break;
-            case 17: // ok
+            case 17:
                 this.codigoObjeto.append(QUEBRA_LINHA).append("ldstr ").append("\"\\n\"");
                 this.codigoObjeto.append(QUEBRA_LINHA).append("call void [mscorlib]System.Console::Write(string)");
                 break;
-            case 18: // ok
+            case 18:
                 tipo1 = this.pilhaTipos.pop();
                 tipo2 = this.pilhaTipos.pop();
                 verifyBool(tipo1, tipo2);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("and");
                 break;
-            case 19: // ok
+            case 19:
                 tipo1 = this.pilhaTipos.pop();
                 tipo2 = this.pilhaTipos.pop();
                 verifyBool(tipo1, tipo2);
@@ -188,25 +188,25 @@ public class Semantico implements Constants {
                 this.pilhaTipos.push(CSTRING);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("ldstr ").append(token.getLexeme());
                 break;
-            case 24: // ok
+            case 24:
                 this.codigoObjeto.append(QUEBRA_LINHA).append("brfalse ").append(this.criarRotulo());
                 break;
-            case 25: // ok
+            case 25:
                 String rotuloAtual = this.pilhaRotulos.pop();
                 String rotuloNovo = this.criarRotulo();
                 this.codigoObjeto.append(QUEBRA_LINHA).append("br ").append(rotuloNovo);
                 this.codigoObjeto.append(QUEBRA_LINHA).append(rotuloAtual).append(":");
                 break;
-            case 26: // ok
+            case 26:
                 this.codigoObjeto.append(QUEBRA_LINHA).append(this.pilhaRotulos.pop()).append(":");
                 break;
-            case 27: // ok
+            case 27:
                 this.codigoObjeto.append(QUEBRA_LINHA).append(this.criarRotulo()).append(":");
                 break;
-            case 28: // ok
+            case 28:
                 this.codigoObjeto.append(QUEBRA_LINHA).append("brtrue ").append(this.pilhaRotulos.pop());
                 break;
-            case 30: // ok
+            case 30:
                 switch (token.getLexeme()) {
                     case "int":
                         this.tipoVar = CINT;
@@ -222,30 +222,20 @@ public class Semantico implements Constants {
                         break;
                 }
                 break;
-            case 31: // ok
+            case 31:
                 for (String listaId : this.listaIds) {
-                    /* nao deve validar
-                    if (this.tabelaSimbolos.containsKey(id)) {
-                        throw new SemanticError("erro acao 31");
-                    }*/
-
                     this.tabelaSimbolos.put(listaId, this.tipoVar);
                     this.codigoObjeto.append(QUEBRA_LINHA).append(".locals (").append(this.tipoVar).append(" ").append(listaId).append(")");
                 }
                 this.listaIds.clear();
                 break;
-            case 32: // ok
+            case 32:
                 this.listaIds.add(token.getLexeme());
                 break;
-            case 33: // ok
+            case 33:
                 id = token.getLexeme();
-
-                /* nao deve validar
-                if (!this.tabelaSimbolos.containsKey(id)) {
-                    throw new SemanticError("erro acao 33");
-                }*/
-
                 tipoId = this.tabelaSimbolos.get(id);
+
                 this.pilhaTipos.push(tipoId);
                 this.codigoObjeto.append(QUEBRA_LINHA).append("ldloc ").append(id);
 
@@ -253,27 +243,17 @@ public class Semantico implements Constants {
                     this.codigoObjeto.append(QUEBRA_LINHA).append("conv.r8");
                 }
                 break;
-            case 34: // ok
+            case 34:
                 id = this.listaIds.pop();
-
-                /* nao deve validar
-                if (!this.tabelaSimbolos.containsKey(id)) {
-                    throw new SemanticError("erro acao 34");
-                }*/
-
                 tipoId = this.tabelaSimbolos.get(id);
-                String tipoExp = this.pilhaTipos.pop();
+                this.pilhaTipos.pop();
 
-                /* nao deve validar
-                if (!tipoId.equals(tipoExp)) {
-                    throw new SemanticError("erro acao 34");
-                }*/
-                if (tipoId.equals(CINT)) { // TODO: VERIFICAR
+                if (tipoId.equals(CINT)) {
                     this.codigoObjeto.append(QUEBRA_LINHA).append("conv.i8");
                 }
                 this.codigoObjeto.append(QUEBRA_LINHA).append("stloc ").append(id);
                 break;
-            case 35: // ok
+            case 35:
                 for (String listaId : this.listaIds) {
                     tipoId = this.tabelaSimbolos.get(listaId);
                     String classe = "";

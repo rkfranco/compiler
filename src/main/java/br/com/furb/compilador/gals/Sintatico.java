@@ -24,7 +24,7 @@ public class Sintatico implements Constants
     {
         return x >= FIRST_SEMANTIC_ACTION;
     }
-    // TODO: Arrumar repetição
+
     private boolean step() throws LexicalError, SyntaticError, SemanticError
     {
         if (currentToken == null)
