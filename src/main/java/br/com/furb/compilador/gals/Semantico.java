@@ -164,29 +164,29 @@ public class Semantico implements Constants {
                 tipo1 = this.pilhaTipos.pop();
                 tipo2 = this.pilhaTipos.pop();
                 verifyDivision(tipo1, tipo2);
-                codigoObjeto.append(QUEBRA_LINHA)
-                        .append("div")
-                        .append(QUEBRA_LINHA)
-                        .append("conv.i8");
+                this.codigoObjeto
+                        .append(QUEBRA_LINHA).append("div")
+                        .append(QUEBRA_LINHA).append("conv.i8");
                 break;
             case 21:
-                pilhaTipos.push(CCHAR);
-                codigoObjeto.append(QUEBRA_LINHA);
+                this.pilhaTipos.push(CCHAR);
+                this.codigoObjeto.append(QUEBRA_LINHA).append("ldstr ");
+
                 switch (token.getLexeme()) {
                     case "\\n":
-                        codigoObjeto.append("\"\\n\"");
+                        this.codigoObjeto.append("\"\\n\"");
                         break;
                     case "\\s":
-                        codigoObjeto.append("\" \"");
+                        this.codigoObjeto.append("\" \"");
                         break;
                     case "\\t":
-                        codigoObjeto.append("\"\\t\"");
+                        this.codigoObjeto.append("\"\\t\"");
                         break;
                 }
                 break;
             case 22:
-                pilhaTipos.push(CSTRING);
-                codigoObjeto.append(QUEBRA_LINHA).append("ldstr ").append(token.getLexeme());
+                this.pilhaTipos.push(CSTRING);
+                this.codigoObjeto.append(QUEBRA_LINHA).append("ldstr ").append(token.getLexeme());
                 break;
             case 24: // ok
                 this.codigoObjeto.append(QUEBRA_LINHA).append("brfalse ").append(this.criarRotulo());
