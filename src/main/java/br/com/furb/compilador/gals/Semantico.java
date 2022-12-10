@@ -21,8 +21,11 @@ public class Semantico implements Constants {
     private int qtdRotulos = 1;
     private String tipoVar = "";
     private String operador = "";
+    private Token tokenAtual;
 
     public void executeAction(int action, Token token) throws SemanticError {
+        this.tokenAtual = token;
+
         String tipo1 = "";
         String tipo2 = "";
         String id = "";
@@ -87,7 +90,7 @@ public class Semantico implements Constants {
                 if (tipo1.equals(tipo2)) {
                     this.pilhaTipos.push(CBOOL);
                 } else {
-                    throw new SemanticError("tipos incompatíveis em expressão relacional");
+                    throw new SemanticError("tipos incompatíveis em expressão relacional", this.tokenAtual.getPosition());
                 }
 
                 switch (this.operador) {
@@ -289,9 +292,9 @@ public class Semantico implements Constants {
                 this.listaIds.clear();
                 break;
         }
+        this.tokenAtual = null;
     }
 
-    // ok
     private void verifyNumberType(String tipo1, String tipo2) throws SemanticError {
         verifyIsNumberType(tipo1);
         verifyIsNumberType(tipo2);
@@ -303,14 +306,12 @@ public class Semantico implements Constants {
         }
     }
 
-    // ok
     private void verifyIsNumberType(String tipo1) throws SemanticError {
         if (!tipo1.equals(CFLOAT) && !tipo1.equals(CINT)) {
-            throw new SemanticError("tipo(s) incompatível(is) em expressão aritmética");
+            throw new SemanticError("tipo(s) incompatível(is) em expressão aritmética", this.tokenAtual.getPosition());
         }
     }
 
-    // ok
     private void verifyDivision(String tipo1, String tipo2) throws SemanticError {
         verifyIsNumberType(tipo1);
         verifyIsNumberType(tipo2);
@@ -318,25 +319,23 @@ public class Semantico implements Constants {
         if (tipo1.equals(tipo2)) {
             this.pilhaTipos.push(tipo1);
         } else {
-            throw new SemanticError("tipo(s) incompatível(is) em expressão aritmética");
+            throw new SemanticError("tipo(s) incompatível(is) em expressão aritmética", this.tokenAtual.getPosition());
         }
     }
 
-    // ok
     private void verifyBool(String tipo1) throws SemanticError {
         if (tipo1.equals(CBOOL)) {
             this.pilhaTipos.push(CBOOL);
         } else {
-            throw new SemanticError("tipo(s) incompatível(is) em expressão lógica");
+            throw new SemanticError("tipo(s) incompatível(is) em expressão lógica", this.tokenAtual.getPosition());
         }
     }
 
-    // ok
     private void verifyBool(String tipo1, String tipo2) throws SemanticError {
         if (tipo1.equals(CBOOL) && tipo2.equals(CBOOL)) {
             this.pilhaTipos.push(CBOOL);
         } else {
-            throw new SemanticError("tipo(s) incompatível(is) em expressão lógica");
+            throw new SemanticError("tipo(s) incompatível(is) em expressão lógica", this.tokenAtual.getPosition());
         }
     }
 
@@ -370,7 +369,6 @@ public class Semantico implements Constants {
         return lexemaFloat;
     }
 
-    // ok
     private String criarRotulo() {
         String rotulo = "L" + this.qtdRotulos;
         this.pilhaRotulos.push(rotulo);
@@ -378,7 +376,6 @@ public class Semantico implements Constants {
         return rotulo;
     }
 
-    // ok
     public String getCodigoObjeto() {
         return this.codigoObjeto.toString();
     }
